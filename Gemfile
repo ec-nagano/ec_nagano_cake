@@ -60,3 +60,25 @@ end
 
 # Windows does not include zoneinfo files, so bundle the tzinfo-data gem
 gem 'tzinfo-data', platforms: [:mingw, :mswin, :x64_mingw, :jruby]
+
+
+#Original
+
+#Use kaminari for pagination
+gem 'kaminari', '~> 1.1.1'
+
+#Use refile to bundle images
+gem 'refile', require: "refile/rails", github: 'manfe/refile'
+gem 'refile-mini_magick'
+
+#Use ransack for search function
+gem 'ransack'
+
+#Use bootstrap to adapt grid design system
+gem 'bootstrap-sass', '~> 3.3.6'
+
+#Use jquery to bundle animations
+gem 'jquery-rails'
+
+#Use devise for customize authenticate functions
+gem 'devise'
