@@ -1,0 +1,20 @@
+
+<!-- 記入途中、、ジャンル検索で選んだジャンル名がindexに表示できるようにします。
+<h1>Products#index</h1>
+<h1>ジャンル検索</h1>
+<% @categories.each do |categories| %>
+<li><%= @product.categories.name %></li>
+<% end %>
+ -->
+<h1>商品一覧</h1>
+<table>
+  <tbody>
+    <% @product.each do |product| %>
+      <tr>
+  <td><%= attachment_image_tag @product, :product_image, size:"160x100", format: 'jpeg' %></td>
+      <td><%=@product.name %></td>
+      <td><%=@product.price*108% %></td>
+    </tr>
+     <% end %>
+   </tbody>
+　</table>
