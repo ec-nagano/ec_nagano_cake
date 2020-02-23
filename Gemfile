@@ -75,7 +75,7 @@ gem 'refile-mini_magick'
 gem 'ransack'
 
 #Use bootstrap to adapt grid design system
-gem 'bootstrap-sass', '~> 3.3.6'
+gem 'bootstrap-sass', '~> 3.4.1'
 
 #Use jquery to bundle animations
 gem 'jquery-rails'
