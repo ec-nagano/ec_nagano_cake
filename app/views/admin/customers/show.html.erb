@@ -1,0 +1,37 @@
+<h3> 会員詳細画面 </h3>
+
+<div class="admin_customer">
+
+	<p class="admin_customer_label">
+        顧客ID     <%= @customer.id %><%= @customer.is_active %>
+    </p>
+
+    <p class="admin_customer_label">
+        氏名     　<%= @customer.first_name %><%= @customer.last_name %>
+    </p>
+
+    <p class="admin_customer_label">
+	  フリガナ     <%= @customer.first_name + @customer.last_name %>
+    </p>
+
+    <p class="admin_customer_label">
+     郵便番号     　<%= @customer.postcode %>
+    </p>
+
+    <p class="admin_customer_label">
+     住所     　　　<%= @customer.address %>
+    </p>
+
+    <p class="admin_customer_label">
+     電話番号     　<%= @customer.phone_number %>
+    </p>
+
+    <p class="admin_customer_label">
+     メールアドレス <%= @customer.email %>
+    </p>
+
+</div>
+
+
+<%= link_to "編集する", edit_admin_customer_path(@customer), class:'btn btn-primary' %>
+<%= link_to "注文履歴一覧を見る", admin_orders, class:'btn btn-primary' %>

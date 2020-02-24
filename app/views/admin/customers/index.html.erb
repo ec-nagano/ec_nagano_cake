@@ -9,17 +9,16 @@
           <th>ステータス</th>
           <th></th>
         </tr>
-
     </thead>
 
     <tbody>
-        <%= @customers.each do |customer| %>
+        <% @customers.each do |customer| %>
           <tr>
             <td>
               <%= customer.id %>
             </td>
             <td>
-              <%= customer.first_name %><%= customer.last_name %>
+              <%= link_to customer.first_name + customer.last_name, admin_customer_path(customer) %>
             </td>
             <td>
               <%= customer.email %>
