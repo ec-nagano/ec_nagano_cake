@@ -22,7 +22,6 @@ class Customers::RegistrationsController < Devise::RegistrationsController
   # PUT /resource
   def update
      super
-     customer.is_active = false
   end
 
   # DELETE /resource
