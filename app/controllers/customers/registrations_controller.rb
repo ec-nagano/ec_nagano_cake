@@ -20,6 +20,7 @@ class Customers::RegistrationsController < Devise::RegistrationsController
   # end
 
   # PUT /resource
+  
   def update
      super
   end

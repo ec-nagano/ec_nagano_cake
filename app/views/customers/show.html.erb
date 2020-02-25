@@ -2,12 +2,12 @@
 <div>
 	<h2>登録情報</h2>
 	<li><%= link_to '編集する',edit_customer_registration_path(@customer.id) %></li>
-	<li><%= link_to 'パスワードを変更する',edit_customer_password_path(@customer.id) %></li>
+	<li><%= link_to 'パスワードを変更する',edit_customer_registration(@customer.id) %></li>
 </div>
 <div>
-	<p>氏名</p><p><%= current_customer.first_name %><%= current_customer.last_name %>
+	<p>氏名</p><p><%= current_customer.first_name+current_customer.last_name %>
 	<br>
-	<P>カナ</P><p><%= current_customer.first_name_kana %><%= current_customer.last_name_kana %></p>
+	<P>カナ</P><p><%= current_customer.first_name_kana+current_customer.last_name_kana %></p>
 	<br>
 	<P>郵便番号</P><p><%= current_customer.postcode %></p>
 	<br>
