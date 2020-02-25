@@ -1,10 +1,8 @@
-<!-- 記入途中、、ジャンル検索で選んだジャンル名がindexに表示できるようにします。
 <h1>Products#index</h1>
 <h1>ジャンル検索</h1>
-<% @categories.each do |categories| %>
-<li><%= @product.categories.name %></li>
+<% @category.each do |category| %>
+<li><%= @product.category.name %></li>
 <% end %>
- -->
 <h1>商品一覧</h1>
 <table>
   <tbody>
@@ -16,4 +14,3 @@
     </tr>
      <% end %>
    </tbody>
-　</table>
