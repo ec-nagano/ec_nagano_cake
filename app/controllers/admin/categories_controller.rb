@@ -16,6 +16,7 @@ class Admin::CategoriesController < ApplicationController
     def update
     end
 
+    private
     def category_params
     	params.require(:category).permit(:name, :is_active)
     end

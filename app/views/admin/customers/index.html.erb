@@ -3,12 +3,11 @@
 <table class="table table-hover table-inverse">
     <thead>
     	<tr>
-          <th>会員ID</th>
-          <th>氏名</th>
-          <th>メールアドレス</th>
-          <th>ステータス</th>
-          <th></th>
-        </tr>
+      　　<th>会員ID</th>
+      　　<th>氏名</th>
+      　　<th>メールアドレス</th>
+      　　<th>ステータス</th>
+      </tr>
     </thead>
 
     <tbody>
@@ -24,7 +23,11 @@
               <%= customer.email %>
             </td>
             <td>
-              <%= customer.is_active %>
+              <% if @customer.is_active == true %>
+                "有効"
+              <% else %>
+                "退会済"
+              <% end %>
             </td>
           </tr>
         <% end %>
