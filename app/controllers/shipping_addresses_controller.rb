@@ -2,6 +2,7 @@ class ShippingAddressesController < ApplicationController
   def index
     @shipping_addresses=Shipping_address.all
     @shipping_address=Shipping_address.new
+    # whereメゾットを使う
   end
 
   def edit

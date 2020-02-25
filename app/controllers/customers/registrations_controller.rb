@@ -20,9 +20,10 @@ class Customers::RegistrationsController < Devise::RegistrationsController
   # end
 
   # PUT /resource
-  # def update
-  #   super
-  # end
+  def update
+     super
+     customer.is_active = false
+  end
 
   # DELETE /resource
   # def destroy
