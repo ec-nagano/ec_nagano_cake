@@ -1,0 +1,65 @@
+<h3> 会員編集画面 </h3>
+
+<div class="admin_customer_edit">
+
+
+  <%= @customer.id %>
+
+  <%= form_for(@customer) do |f| %>
+
+    <div class="customer_edit_field">
+      <label for="customer_edit_label">氏名
+        <%= f.text_field :first_name %><%= f.text_field :last_name %>
+      </label>
+    </div>
+
+
+    <div class="customer_edit_field">
+	    <label for="customer_edit_label">フリガナ
+	      <%= f.text_field :first_name_kana %><%= f.text_field :last_name_kana %>
+      </label>
+    </div>
+
+
+    <div class="customer_edit_field">
+	    <label for="customer_edit_label">郵便番号
+	      <%= f.text_field :postcode %>
+      </label>
+    </div>
+
+
+    <div class="customer_edit_field">
+	   <label for="customer_edit_label">住所
+	    <%= f.text_field :adress %>
+     </label>
+    </div>
+
+
+    <div class="customer_edit_field">
+	    <label for="customer_edit_label">電話番号
+	      <%= f.telephone_field :phone_number %>
+      </label>
+    </div>
+
+
+    <div class="customer_edit_field">
+	    <label for="customer_edit_label">メールアドレス
+	      <%= f.email_field :email %>
+      </label>
+    </div>
+
+
+    <div class="customer_edit_field">
+	    <label for="customer_edit_label">会員ステータス
+	      <label for="edit_is_active_true"><%=f.radio_button :is_active, true %>"有効"</label>
+	      <label for="edit_is_active_false"><%=f.radio_button :is_active, false %>"退会済み"</label>
+      </label>
+    </div>
+
+    <div class="customer_edit_action">
+  	  <%= f.submit("変更を保存する", class: "btn btn-primary") %>
+    </div>
+
+   <% end %>
+
+</div>
