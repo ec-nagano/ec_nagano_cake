@@ -1,0 +1,53 @@
+<h2>ショッピングカート</h2>
+
+<%= link_to("カートを空にする", "/cart_items", method: :delete, class: "btn btn-danger") %>
+
+<table class="table table-hover table-inverse">
+    <thead>
+        <tr>商品名</tr>
+        <tr>単価（税込）</tr>
+        <tr>数量</tr>
+        <tr>小計</tr>
+        <tr></tr>
+    </thead>
+
+    <tbody>
+        <% @cart_items.each do |cart_item| %>
+            <tr>
+                <%= link_to(product_path(cart_item.id)) do %>
+                    <%= attachment_image_tag(cart_item.product, :product_image, :fill, 30, 30) %>
+                    <%= cart_item.product.name %>
+                <% end %> 
+            </tr>
+            <tr>
+                <%# 税込み金額を計算するtaxedメソッドを呼び出す %>
+                <%= cart_item.price.taxed %>
+            </tr>
+            <tr>
+                <%= form_for(cart_item, url: cart_item_path(cart_item.id), method: :patch) do |f| %>
+                    <%= f.number_field :amount %>
+                    <%= f.submit '変更' %>
+                <% end %>
+            </tr>
+            <tr>
+                <%# 商品ごとの小計を計算 %>
+                <% sub_total = cart_item.price.taxed * cart_item.amount %>
+                <%= sub_total %>
+            </tr>
+            <tr>
+                <%= link_to("削除する", cart_item_path(cart_item.id), method: :delete, class: "btn btn -danger" %>
+            </tr>
+        <% end %>
+    </tbody>
+</table>
+
+<%= link_to("買い物を続ける", products_path, class: "btn btn-primary") %>
+
+<table>
+    <tr>
+        <th>合計金額</th>
+        <td><%= total_price.taxed %></td>
+    </tr>
+</table>
+
+<%= link_to("情報入力に進む", new_order_path, class: "btn btn-primary") %>
