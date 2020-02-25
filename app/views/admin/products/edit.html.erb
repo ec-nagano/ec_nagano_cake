@@ -1,0 +1,50 @@
+<h3> 商品 編集画面 </h3>
+
+<div class="admin_product_edit">
+
+  <%= form_for(@product) do |f| %>
+
+	  <div class="product_edit_field">
+	  <%= f.attachment_field :product_image %>
+	  <!-- 画像選択ボタンにbootstrapをかける -->
+	  <!-- この上にプレビュー画像を実装する -->
+
+	  </div>
+
+	  <div class="product_edit_field">
+        <label for="product_edit_label">商品名
+          <%= f.text_field :name %>
+        </label>
+      </div>
+
+      <div class="product_edit_field">
+      	<label for="product_edit_label">商品説明
+      	  <%= f.text_area :content %>
+      	</label>
+      </div>
+
+
+      <div class="product_edit_field"><!-- ジャンル名を表示させるためにカテゴリーモデルからデータをひっぱってくる　-->
+      	<label for="product_edit_label">ジャンル
+          <%= f.collection_select(:category_id, Category.where(is_active: true), :id, :name)%>
+        </label>
+      </div>
+
+
+      <div class="product_edit_field">
+      	<label for="product_edit_label">税抜価格
+      	  <%= f.text_field :price %> 円
+        </label>
+      </div>
+
+      <div class="product_edit_field">
+      	<label for="product_edit_label">販売ステータス
+      	  <%= f.select :is_active, [["販売中", true],["売り切れ", false]] , include_blank: "選択して下さい" %>
+      	</label>
+      </div>
+
+      <div class="product_edit_action">
+  	  <%= f.submit("変更を保存", class: "btn btn-primary") %>
+      </div>
+  <% end %>
+</div>
