@@ -22,15 +22,13 @@
 
 	<% sum = 0 %>
 	<%= @ordered_items.each do |item| %>
-		<!-- 注文商品に紐つく商品（自信ない） -->
-		<%= prduct = item.product %>
 		<tr>
-			<td><%= product.name %></td>
+			<td><%= item.product.name %></td>
 			<!-- 税込計算は後日 -->
-			<td><%= item.price %></td>
+			<td><%= (item.price * (1 + $tax_rate)).round %></td>
 			<td><%= item.amount %></td>
-			<td><%= item.price * item.amount %></td>
-			<% sum += item.price * item.amount %>
+			<td><%= (item.price * (1 + $tax_rate)).round * item.amount %></td>
+			<% sum += (item.price * (1 + $tax_rate)).round * item.amount %>
 			<td>
 				<!-- controllerにparamsを渡したいだけの時はmodelと紐つけない？url: admin_order_path -->
 				<%= form_with model: item do |f| %>

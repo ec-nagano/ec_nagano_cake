@@ -12,49 +12,56 @@ class Admin::OrdersController < ApplicationController
 	end
 
 	def update
-		@order = Order.find(params[:id])
-		@ordered_item = Ordered_item.find_by(id: params[:item][:item_id])
-		@ordered_item.status = params[:item][:status]
+		order = Order.find(params[:id])
 
-		@order.update(order_params)
-		@ordered_item.update
+		ordered_item = Ordered_item.find_by(id: params[:item][:item_id])
+		ordered_item.status = params[:item][:status]
+		ordered_items = @order.ordered_items#all?とany?で使う
 
+		#注文ステータスの分岐
+		case order.status
 		#注文ステの入金確認1がきたら自動で制作ステを制作待ち1にする
-		if @order.status == 1
-
+		when 1
+			@order.update(order_params)
 			@ordered_items = @order.ordered_items
 			@ordered_items.each do |item|
 				item.status = 1
 				item.update
 			end
 			redirect_to("/admin/orders/#{@order.id}")
+		#注文ステが発送済み4の時
+		when 4
+			@order.update(order_params)
+			redirect_to("/admin/orders/#{@order.id}")
 		end
 
+		#製作ステータスの分岐
 		#一つの制作ステの製作中2がきたら自動で注文ステを製作中2にする
 		#どっちか、うまくいった方
+
 		# ordered_items = @order.ordered_items
 		# if ordered_items.any? { |item| item.status == 2 }
-		# 	@order.status = 2
-		# 	@order.update
+		#   ordered_item.update
+		#   order.status = 2
+		# 	order.update
 		# 	redirect_to("/admin/orders/#{@order.id}")
 		# end
-		if @ordered_item.status == 2
+		if ordered_item.status == 2
+			ordered_item.update
 
-			@order.status = 2
-			@order.update
+			order.status = 2
+			order.update
 			redirect_to("/admin/orders/#{@order.id}")
 		end
 
 		#全てのステの製作完了3がきたら自動で注文ステを発送準備中3にする
-		ordered_items = @order.ordered_items
 		if ordered_items.all? { |item| item.status == 3 }
+			ordered_item.update
 
-			@order.status = 3
-			@order.update
+			order.status = 3
+			order.update
 			redirect_to("/admin/orders/#{@order.id}")
 		end
-
-		redirect_to("/admin/orders/#{@order.id}")
 	end
 
 	private
