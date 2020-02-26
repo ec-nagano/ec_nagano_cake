@@ -1,0 +1,45 @@
+<h3> 商品　詳細画面 </h3>
+
+<div class="admin_product_show">
+
+	<div class="admin_product_show_image">
+	  <%= attachment_image_tag @product, :product_image, :fill, 100, 100, format: 'jpeg', fallback: "no_image.jpg", size: '150x200' %>
+    </div>
+
+    <p class="admin_product_label">
+
+        商品名
+        <%= @product.name %>
+
+    </p>
+
+
+    <p class="admin_product_label">
+
+    	商品説明
+    	 <%= @product.content %>
+    </p>
+
+
+    <p class="admin_product_label">
+
+    	ジャンル
+    	<%= @product.category.name %>
+    </p>
+
+    <p class="admin_product_label">
+
+    	税込価格（税抜価格）
+    	<!-- 後からメソッドで税込価格を呼んでくる -->
+    	<%= @product.price %>円
+    </p>
+
+    <p class="admin_product_label">
+    	<% if @product.is_active == true %>
+        　"販売中"
+        <% else %>
+        　"売り切れ"
+        <% end %>
+    </p>
+
+</div>

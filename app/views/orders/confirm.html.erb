@@ -1,0 +1,52 @@
+<h2>注文情報確認</h2>
+<table>
+    <thead>
+        <tr>商品</tr>
+        <tr>単価（税込）</tr>
+        <tr>個数</tr>
+        <tr>小計</tr>
+    </thead>
+
+    <tbody>
+        <%# current_customerに紐付くcart_itemを全て表示する %>
+        <%= @cart_items.each do |cart_item| %>
+            <tr>
+                <%= attachment_image_tag(cart_item.product, :product_image, :fill, 30, 30) %>
+                <%= cart_item.product.name %>
+            </tr>
+            <tr><%= (cart_item.product.price * (1 + $tax_rate)).round %></tr>
+            <tr><%= cart_item.amount %></tr>
+            <tr><%= (cart_item.product.price * (1 + $tax_rate)).round * cart_item.amount %></tr>
+        <% end %>
+    </tbody>
+</table> 
+
+<table>
+    <tr>
+        <th>送料</th>
+        <td><%= @order.delivery_fee %></td>
+    </tr>
+    <tr>
+        <th>商品合計</th>
+        <td><%= @order.billing_amount %></td>
+    </tr>
+    <tr>
+        <th>請求金額</th>
+        <td><%= @order.delivery_fee + @order.billing_amount %></td>
+    </tr>
+</table>
+
+<h2>支払い方法</h2><%= @order[:payment] %>
+<h2>お届け先</h2><%= "〒" + order.postcode + @order.address + @order.recipient %>
+
+<%# hidden_fieldを用いて、createアクションにパラメータを送信する %>
+<%= form_with(model: @order, url: orders_path, local: true) %>
+    <%= f.hidden_field :customer_id %>
+    <%= f.hidden_field :recipient %>
+    <%= f.hidden_field :address %>
+    <%= f.hidden_field :postcode %>
+    <%= f.hidden_field :delivery_fee %>
+    <%= f.hidden_field :billing_amount %>
+    <%= f.hidden_field :payment %>
+    <%= f.submit("購入を確定する", class: "btn btn-default") %>
+<% end %> 

@@ -1,0 +1,26 @@
+<h2>購入情報入力/h2>
+
+<%# confirmコントローラでordersモデルに保存する値を判定するため、引数にモデルを定義しない %>
+<%= form_with(url: orders_confirm_path, local: true) do |f| %>
+    <h3>支払方法</h3>
+    <label><%= f.radio_button_tag(:payment, :クレジットカード) %>クレジットカード</label>
+    <label><%= f.radio_button_tag(:payment, :銀行振込) %>銀行振込</label>
+
+    <%# radio_button_tagでaddress_typeの値を送信し、コントローラーでorderに保存するpostcode, address, recipientを判断する %>
+    <h3>お届け先</h3>
+    <label><%= f.radio_button_tag("address_type", 0) %>ご自身の住所</label>
+    <%= "〒" + current_customer.postcode %>
+    <%= current_customer.address %><br>
+    <%= current_customer.firstname + " " + current_customer.lastname %>
+
+    <%# current_userに紐付くshipping_addressを@addressに代入し、collection_selectで表示する %>
+    <label><%= f.radio_button_tag("address_type", 1) %>登録済住所から選択</label>
+    <%= f.collection_select(:existing_address, @addresses, :id, :postcode) %>
+
+    <label><%= f.radio_button_tag("address_type", 2) %>新しいお届け先</label>
+    <label>郵便番号<%= f.text_field(:new_postcode) %></label><p>ハイフンなし</p>
+    <label>住所<%= f.text_field(:new_address) %></label>
+    <label>宛名<%= f.text_field(:new_recipient) %></label>
+
+    <%= f.submit("確認画面へ進む", class: "btn btn-primary") %>
+<% end %> 

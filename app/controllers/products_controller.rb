@@ -1,12 +1,13 @@
+
 class ProductsController < ApplicationController
   def index
-  	@product=Product.all
-  	@categories=Categories.all
+    @products=Product.all
+    @categories=Category.all
   end
 
   def show
-  	@categories=Categories.all
-  	@product=Product.find(params[:id])
+    @categories=Category.all
+    @product=Product.find(params[:id])
   end
 
    private
@@ -14,3 +15,6 @@ class ProductsController < ApplicationController
     params.require(:product).permit(:name, :content, :price, :product_image, :is_active)
 end
 end
+
+
+
