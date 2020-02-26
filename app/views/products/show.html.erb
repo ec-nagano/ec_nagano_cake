@@ -1,9 +1,9 @@
-h1>Products#show</h1>
-記入途中、、ジャンル検索で選んだジャンル名がindexに表示できるようにします。
 <h1>ジャンル検索</h1>
-<% @category.each do |category| %>
-<li><%= @category.name %></li>
+<% @categories.each do |category| %>
+<li><%= link_to category.name, products_path(category_id: category.id)  %></li>
 <% end %>
+
+
 <tbody>
   <td><%= attachment_image_tag @product, :product_image, size:"200x200", format: 'jpeg' %>
   <%= @product.name %></td>
@@ -17,8 +17,4 @@ h1>Products#show</h1>
     <% end %>
 
 </tbody>
-
-
-
-
 
