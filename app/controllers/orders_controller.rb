@@ -38,6 +38,13 @@ class OrdersController < ApplicationController
             params[:order][:address] = params[:new_address]
             params[:order][:recipient] = params[:new_recipient]
         end
+        params[:order][:delivery_fee] = $delivery_fee
+        # 請求額を計算する処理
+        @cart_items.each do |e|
+            billing_amount += (e.product.price * (1 + $tax_rate)).round
+        end
+        params[:order][:billing_amount] = billing_amount
+        params[:order][:payment] = params[:payment]
         @order = Order.new(order_params)
         @order.customer_id = current_customer.id
         unless @order.valid?
@@ -48,16 +55,16 @@ class OrdersController < ApplicationController
 
     def create
         # ordersテーブルのレコードを作成する処理
-        @order = Order.new(order_params)
-        @order.customer_id = current_customer.id
-        @order.save
+        order = Order.new(order_params)
+        order.customer_id = current_customer.id
+        order.save
         # ordered_itemsテーブルのレコードを作成する処理
         @cart_items = CartItem.where(customer_id: current_customer.id)
         @cart_items.each do |e|
             ordered_item = OrderedItems.new(
                 order_id: @order.id,
                 product_id: e.id,
-                price: e.price.taxed,
+                price: (e.price * (1 * $tax_rate)).round,
                 amount: e.amount
             )
             ordered_item.save
