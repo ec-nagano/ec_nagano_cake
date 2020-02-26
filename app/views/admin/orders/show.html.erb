@@ -1,0 +1,47 @@
+<h1>注文詳細画面</h1>
+
+<p>購入者 <%= @customer.first_name + @customer.last_name %></p>
+<p>配送先 <%= @order.adress %><%= @order.recipient %></p>
+<p>支払方法 <%= @order.payment %></p>
+<p>
+	注文ステータス
+	<%= form_with model: @order do |f| %>
+		<%= f.select :status, [["入金待ち", 0], ["入金確認", 1], ["製作中", 2], ["発送準備中", 3], ["発送済み", 4]], { selected: @order.status }, {} %>
+		<%= f.submit　"更新" %>
+	<% end %>
+</p>
+
+<table>
+	<tr>
+		<th>商品名</th>
+		<th>単価(税込)</th>
+		<th>数量</th>
+		<th>小計</th>
+		<th>製作ステータス</th>
+	</tr>
+
+	<% sum = 0 %>
+	<%= @ordered_items.each do |item| %>
+		<!-- 注文商品に紐つく商品（自信ない） -->
+		<%= prduct = item.product %>
+		<tr>
+			<td><%= product.name %></td>
+			<!-- 税込計算は後日 -->
+			<td><%= item.price %></td>
+			<td><%= item.amount %></td>
+			<td><%= item.price * item.amount %></td>
+			<% sum += item.price * item.amount %>
+			<td>
+				<!-- controllerにparamsを渡したいだけの時はmodelと紐つけない？url: admin_order_path -->
+				<%= form_with model: item do |f| %>
+					<%= f.select :status, [["着手不可", 0], ["製作待ち", 1], ["製作中", 2], ["製作完了", 3]], { selected: item.status }, {} %>
+					<% f.hidden_field :item_id, value: item.id %>
+					<%= f.submit　"更新" %>
+			</td>
+		</tr>
+	<% end %>
+</table>
+
+<p>商品合計　<%= sum %></p>
+<p>送料　<%= 800 %></p>
+<p>請求金額合計　<%= sum + 800 %></p>
