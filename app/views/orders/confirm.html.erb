@@ -14,9 +14,9 @@
                 <%= attachment_image_tag(cart_item.product, :product_image, :fill, 30, 30) %>
                 <%= cart_item.product.name %>
             </tr>
-            <tr><%= cart_item.product.price.taxed %></tr>
+            <tr><%= (cart_item.product.price * (1 + $tax_rate)).round %></tr>
             <tr><%= cart_item.amount %></tr>
-            <tr><%= cart_item.product.price.taxed * cart_item.amount %></tr>
+            <tr><%= (cart_item.product.price * (1 + $tax_rate)).round * cart_item.amount %></tr>
         <% end %>
     </tbody>
 </table> 
@@ -24,7 +24,7 @@
 <table>
     <tr>
         <th>送料</th>
-        <td><%= @order.billing_amount %></td>
+        <td><%= @order.delivery_fee %></td>
     </tr>
     <tr>
         <th>商品合計</th>
@@ -36,7 +36,7 @@
     </tr>
 </table>
 
-<h2>支払い方法</h2><%= @order.payment %>
+<h2>支払い方法</h2><%= @order[:payment] %>
 <h2>お届け先</h2><%= "〒" + order.postcode + @order.address + @order.recipient %>
 
 <%# hidden_fieldを用いて、createアクションにパラメータを送信する %>
