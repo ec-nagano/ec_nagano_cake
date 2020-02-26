@@ -22,16 +22,16 @@ class Admin::OrdersController < ApplicationController
 		case order.status
 		#注文ステの入金確認1がきたら自動で制作ステを制作待ち1にする
 		when 1
-			@order.update(order_params)
-			@ordered_items = @order.ordered_items
-			@ordered_items.each do |item|
+			order.update(order_params)
+			ordered_items = @order.ordered_items
+			ordered_items.each do |item|
 				item.status = 1
 				item.update
 			end
 			redirect_to("/admin/orders/#{@order.id}")
 		#注文ステが発送済み4の時
 		when 4
-			@order.update(order_params)
+			order.update(order_params)
 			redirect_to("/admin/orders/#{@order.id}")
 		end
 
