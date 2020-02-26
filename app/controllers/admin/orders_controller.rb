@@ -1,4 +1,5 @@
 class Admin::OrdersController < ApplicationController
+	before_action :authenticate_admin!
 	def index
 		@orders = Order.page(params[:page]).reverse_order
 	end
@@ -21,8 +22,8 @@ class Admin::OrdersController < ApplicationController
 		#注文ステの入金確認1がきたら自動で制作ステを制作待ち1にする
 		if @order.status == 1
 
-			@order_items = @order.ordered_items
-			@order_items.each do |item|
+			@ordered_items = @order.ordered_items
+			@ordered_items.each do |item|
 				item.status = 1
 				item.update
 			end
@@ -31,8 +32,8 @@ class Admin::OrdersController < ApplicationController
 
 		#一つの制作ステの製作中2がきたら自動で注文ステを製作中2にする
 		#どっちか、うまくいった方
-		# order_items = @order.ordered_items
-		# if order_items.any? { |item| item.status == 2 }
+		# ordered_items = @order.ordered_items
+		# if ordered_items.any? { |item| item.status == 2 }
 		# 	@order.status = 2
 		# 	@order.update
 		# 	redirect_to("/admin/orders/#{@order.id}")
@@ -57,12 +58,7 @@ class Admin::OrdersController < ApplicationController
 	end
 
 	private
-
 	  	def order_params
 	  		params.require(:order).permit(:status)
-	  	end
-
-	  	def ordered_item_params
-	  		params.require(:ordered_item).permit(:status)
 	  	end
 end
