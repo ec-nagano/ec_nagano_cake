@@ -1,0 +1,20 @@
+<h3> ジャンル編集画面 </h3>
+
+<div class="admin_category_edit">
+
+    <%= form_for(@category, :url => {:action => :update}) do |f| %>
+
+      <div class="category_edit_field"><!-- このdivの中にフォームから保存ボタンまでを全て実装 -->
+        <label for="category_edit_label">ジャンル
+          <%= f.text_field :name %>
+        </label>
+        <!-- ラジオボタン -->
+        <label for="category_edit_is_active_true"><%=f.radio_button :is_active, true %>有効</label>
+        <label for="category_edit_is_active_false"><%=f.radio_button :is_active, false %>無効</label>
+
+        <%= f.submit("変更を保存する", class: "btn btn-primary") %>
+
+      </div>
+
+    <% end %>
+</div>
