@@ -7,5 +7,5 @@
 	<%= link_to '退会しない',customer_path(@customer.id) %>
 </div>
 <div>
-	<%= link_to '退会する', customer_registration_path, method: :patch %>
+	<%= link_to '退会する', customer_registration_path(unsubscribing: true) %>
 </div>

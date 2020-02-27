@@ -16,7 +16,7 @@ Rails.application.routes.draw do
   }
   # 顧客側
   # homesコントローラー
-  get '/' => 'homes#top'
+  root 'homes#top'
   get 'about' => 'homes#about'
   # customersコントローラ-
   get '/customers/confim_unsubscribing' => 'customers#confirm_unsubscribing'

@@ -3,7 +3,7 @@
 <div class="admin_product_show">
 
 	<div class="admin_product_show_image">
-	  <%= attachment_image_tag @product, :product_image, :fill, 100, 100, format: 'jpeg', fallback: "no_image.jpg", size: '150x200' %>
+	  <%= attachment_image_tag @product, :product_image, :fill, 250, 200, format: 'jpeg', fallback: "no_image.jpg", size: '250x200' %>
     </div>
 
     <p class="admin_product_label">
@@ -36,10 +36,12 @@
 
     <p class="admin_product_label">
     	<% if @product.is_active == true %>
-        　"販売中"
+        　販売中
         <% else %>
-        　"売り切れ"
+        　売り切れ
         <% end %>
     </p>
+
+    <%= link_to "編集する", edit_admin_product_path(@product), class:'btn btn-primary' %>
 
 </div>

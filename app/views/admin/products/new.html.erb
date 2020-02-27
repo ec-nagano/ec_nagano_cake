@@ -2,7 +2,7 @@
 
 <div class="admin_product_new">
 
-<%= form_for(@product) do |f| %>
+<%= form_for(@product, url: '/admin/products') do |f| %>
 
 	  <div class="product_new_field">
 	  <%= f.attachment_field :product_image %>

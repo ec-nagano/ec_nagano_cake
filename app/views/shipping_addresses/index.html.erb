@@ -21,9 +21,9 @@
 	 <% @shipping_addresses.each do |shipping_address| %>
       <tr>
       <td><%= shipping_address.postcpde %></td>
-      <td><%= shipping_address.adress %></td>
+      <td><%= shipping_address.address %></td>
       <td><%= shipping_address.name %></td>
-      <td><%= link_to '編集', edit_shipping_adress_path(shipping_address.id) %></td>
+      <td><%= link_to '編集', edit_shipping_address_path(shipping_address.id) %></td>
       <td><%= link_to '削除', shipping_addresses_path(shipping_address.id), method: :delete %></td>
 	  </tr>
 	</tbody>

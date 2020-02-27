@@ -2,7 +2,8 @@
 
 <div class="admin_product_edit">
 
-  <%= form_for(@product) do |f| %>
+  <%= form_for(@product, url: "/admin/products/#{@product.id}", :method=>:patch) do |f| %>
+
 
 	  <div class="product_edit_field">
 	  <%= f.attachment_field :product_image %>
