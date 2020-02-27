@@ -10,8 +10,8 @@
         <tr>小計</tr>
         <tr></tr>
     </thead>
-
     <tbody>
+        <% total_price = 0%>
         <% @cart_items.each do |cart_item| %>
             <tr>
                 <%= link_to(product_path(cart_item.id)) do %>
@@ -23,7 +23,7 @@
                 <%= (cart_item.price * (1 + $tax_rate)).round %>
             </tr>
             <tr>
-                <%= form_for(cart_item, url: cart_item_path(cart_item.id), method: :patch) do |f| %>
+                <%= form_with(model: cart_item, url: cart_item_path(cart_item.id), method: :patch) do |f| %>
                     <%= f.number_field :amount %>
                     <%= f.submit '変更' %>
                 <% end %>
@@ -33,10 +33,10 @@
                 <% sub_total = (cart_item.price * (1 + $tax_rate)).round * cart_item.amount %>
                 <%= sub_total %>
                 <%# 合計金額を計算 %>
-                <% total_price += sub_total%>
+                <% total_price += sub_total %>
             </tr>
             <tr>
-                <%= link_to("削除する", cart_item_path(cart_item.id), method: :delete, class: "btn btn-danger" %>
+                <%= link_to("削除する", cart_item_path(cart_item.id), method: :delete, class: "btn btn-danger") %>
             </tr>
         <% end %>
     </tbody>
