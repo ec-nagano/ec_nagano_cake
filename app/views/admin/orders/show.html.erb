@@ -41,5 +41,5 @@
 </table>
 
 <p>商品合計　<%= sum %>円</p>
-<p>送料　<%= 800 %>円</p>
-<p>請求金額合計　<%= sum + 800 %>円</p>
+<p>送料　<%= @order.delivery_fee %>円</p>
+<p>請求金額合計　<%= sum + @order.delivery_fee %>円</p>
