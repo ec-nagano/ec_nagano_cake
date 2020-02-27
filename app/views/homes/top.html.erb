@@ -6,7 +6,7 @@
 	<%= link_to product_path(p.id) do %>
 		<%= attachment_image_tag(p, :product_image, :fill, 50, 50) %>
 		<%= p.name %>
-	<%= end %>
+	<% end %>
 <% end %>
 
 <%= link_to "商品一覧へ（ジャンル検索）", products_path %>
