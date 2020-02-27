@@ -23,12 +23,12 @@
 
   <div class="field">
     <%= f.label :address, "住所" %>
-    <%= f.email_field :address %>
+    <%= f.text_field :address %>
   </div>
 
   <div class="field">
     <%= f.label :phone_number, "電話番号" %>
-    <%= f.email_field :phone_number, "例) 000000000" %>ハイフン不要
+    <%= f.text_field :phone_number, placeholder: "例) 000000000" %>ハイフン不要
   </div>
 
   <div class="field">
@@ -55,3 +55,6 @@
 <% end %>
 
 <%= render "customers/shared/links" %>
+
+
+
