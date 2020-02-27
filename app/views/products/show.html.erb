@@ -1,14 +1,14 @@
-h1>Products#show</h1>
-記入途中、、ジャンル検索で選んだジャンル名がindexに表示できるようにします。
 <h1>ジャンル検索</h1>
-<% @category.each do |category| %>
-<li><%= @category.name %></li>
+<% @categories.each do |category| %>
+<li><%= link_to category.name, products_path(category_id: category.id)  %></li>
 <% end %>
+
+
 <tbody>
   <td><%= attachment_image_tag @product, :product_image, size:"200x200", format: 'jpeg' %>
   <%= @product.name %></td>
   <td><%= @product.content %></td>
-  <td><%= @product.price*108% %><li>(税込価格)></li></td>
+  <td><%= @product.(price * (1 + $tax_rate)).round %><li>(税込価格)></li></td>
 <!-- cart_itemのコントローラーのcreate actionを記述しました。 -->
   <%= form_for @cart_item,:url => {controller: "cart_item", action: "create"} do |f| %>
     <td><%= f.number_field :amount %></td>
@@ -17,8 +17,4 @@ h1>Products#show</h1>
     <% end %>
 
 </tbody>
-
-
-
-
 

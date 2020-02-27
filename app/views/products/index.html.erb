@@ -1,16 +1,20 @@
-<h1>Products#index</h1>
 <h1>ジャンル検索</h1>
-<% @category.each do |category| %>
-<li><%= @product.category.name %></li>
+<% @categories.each do |category| %>
+<li><%= link_to category.name, products_path(category_id: category.id)  %></li>
 <% end %>
-<h1>商品一覧</h1>
+
+<% if @category.blank? %>
+	<h1>商品一覧</h1>
+<% else %>
+	<h1><%= @category.name %></h1>
+<% end %>
 <table>
   <tbody>
-    <% @product.each do |product| %>
+    <% @products.each do |product| %>
       <tr>
-  <td><%= attachment_image_tag @product, :product_image, size:"160x100", format: 'jpeg' %></td>
-      <td><%=@product.name %></td>
-      <td><%=@product.price*108% %></td>
+  <td><%= attachment_image_tag product, :product_image, size:"160x100", format: 'jpeg' %></td>
+      <td><%= product.name %></td>
+      <td><%= product.price * (1 + $tax_rate)).round %></td>
     </tr>
-     <% end %>
+     <% end %>s
    </tbody>

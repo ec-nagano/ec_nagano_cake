@@ -1,13 +1,21 @@
 
 class ProductsController < ApplicationController
+    # 全てのアクションについて、ログイン済みかを判定する
+    # before_action :authenticate_customer!
   def index
-    @products=Product.all
+    if params[:category_id].blank?
+      @products=Product.all
+    else
+      # category.idを持つ商品のみを表示する。　to_iはparmasのidが文字列のため整数に変換するために必要。
+      @products=Product.where(category_id:params[:category_id].to_i)
+      @category=Category.find(params[:category_id].to_i)
+    end
     @categories=Category.all
   end
 
   def show
-    @categories=Category.all
     @product=Product.find(params[:id])
+    @categories=Category.all
   end
 
    private
@@ -15,6 +23,5 @@ class ProductsController < ApplicationController
     params.require(:product).permit(:name, :content, :price, :product_image, :is_active)
 end
 end
-
 
 
