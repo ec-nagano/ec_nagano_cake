@@ -14,7 +14,7 @@
       <tr>
   <td><%= attachment_image_tag product, :product_image, size:"160x100", format: 'jpeg' %></td>
       <td><%= product.name %></td>
-      <td><%= product.price * (1 + $tax_rate)).round %></td>
+      <td><%= (product.price * (1 + $tax_rate)).round %></td>
     </tr>
-     <% end %>s
+     <% end %>
    </tbody>
