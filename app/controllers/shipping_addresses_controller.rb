@@ -1,15 +1,15 @@
 class ShippingAddressesController < ApplicationController
   def index
-    @shipping_addresses=Shipping_address.where(customer_id:params[:customer_id])
-    @shipping_address=Shipping_address.new
+    @shipping_address=ShippingAddress.new
+    @shipping_addresses=ShippingAddress.where(customer_id: current_customer.id)
   end
 
   def edit
-    @shipping_address=Shipping_address.find(params[:id])
+    @shipping_address=ShippingAddress.find(params[:id])
   end
 
   def update
-    @shipping_address=Shipping_address.find(params[:id])
+    @shipping_address=ShippingAddress.find(params[:id])
      if @shipping_address.update(shipping_address_params)
     redirect_to shipping_addresses_path
     else
@@ -18,18 +18,20 @@ class ShippingAddressesController < ApplicationController
   end
 
   def destroy
-    @shipping_address=Shipping_address.find(params[:id])
+    @shipping_address=ShippingAddress.find(params[:id])
     @shipping_address.destroy
     redirect_to shipping_addresses_path
   end
 
 
   def create
-    @shipping_address=Shipping_address.new(shipping_address_params)
-    @shipping_addresses=Shipping_address.all
+    @shipping_address=ShippingAddress.new(shipping_address_params)
+    @shipping_address.customer_id = current_customer.id
     if @shipping_address.save
+      @shipping_addresses=ShippingAddress.all
       redirect_to shipping_addresses_path
     else
+      @shipping_addresses=ShippingAddress.all
       render action: :index
     end
   end
