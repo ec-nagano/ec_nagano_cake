@@ -3,21 +3,49 @@
 <%= form_for(resource, as: resource_name, url: registration_path(resource_name)) do |f| %>
   <%= render "devise/shared/error_messages", resource: resource %>
 
+
   <div class="field">
-    <%= f.label :email %><br />
-    <%= f.email_field :email, autofocus: true, autocomplete: "email" %>
+    <p>名前</p>
+    <%= f.text_field :first_name, autofocus: true %>
+    <%= f.text_field :last_name %>
   </div>
 
   <div class="field">
-    <%= f.label :password %>
+    <p>フリガナ</p>
+    <%= f.text_field :first_name_kana %>
+    <%= f.text_field :last_name_kana %>
+  </div>
+
+  <div class="field">
+    <%= f.label :postcode, "郵便番号" %>
+    〒<%= f.text_field :postcode, placeholder: "例) 0000000" %>ハイフン不要
+  </div>
+
+  <div class="field">
+    <%= f.label :address, "住所" %>
+    <%= f.email_field :address %>
+  </div>
+
+  <div class="field">
+    <%= f.label :phone_number, "電話番号" %>
+    <%= f.email_field :phone_number, "例) 000000000" %>ハイフン不要
+  </div>
+
+  <div class="field">
+    <%= f.label :email, "メールアドレス" %>
+    <%= f.email_field :email, placeholder: "例）example@abc.com", autocomplete: "email" %>
+  </div>
+
+  <div class="field">
+    <%= f.label :password, "パスワード" %>
     <% if @minimum_password_length %>
     <em>(<%= @minimum_password_length %> characters minimum)</em>
-    <% end %><br />
-    <%= f.password_field :password, autocomplete: "new-password" %>
+    <% end %>
+    <%= f.password_field :password, placeholder: "例) 半角英数字6文字以上", autocomplete: "new-password" %>
   </div>
 
   <div class="field">
-    <%= f.label :password_confirmation %><br />
+    <%= f.label :password_confirmation, "パスワード(確認用)" %>
     <%= f.password_field :password_confirmation, autocomplete: "new-password" %>
   </div>
 
