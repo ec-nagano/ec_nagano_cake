@@ -10,7 +10,6 @@ class ProductsController < ApplicationController
       @products=Product.where(category_id:params[:category_id].to_i)
       @category=Category.find(params[:category_id].to_i)
     end
-    # @product=Product.find(params[:id])
     @categories=Category.all
   end
 
