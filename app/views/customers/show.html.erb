@@ -2,7 +2,7 @@
 <div>
 	<h2>登録情報</h2>
 	<li><%= link_to '編集する',edit_customer_registration_path(@customer.id) %></li>
-	<li><%= link_to 'パスワードを変更する',edit_customer_registration(@customer.id) %></li>
+	<li><%= link_to 'パスワードを変更する',edit_customer_registration_path(@customer.id) %></li>
 </div>
 <div>
 	<p>氏名</p><p><%= current_customer.first_name+current_customer.last_name %>
@@ -25,3 +25,5 @@
 	<h2>注文履歴</h2>
 	<li><%= link_to '一覧を見る',orders_path(@customer.id) %></li>
 </div>
+
+

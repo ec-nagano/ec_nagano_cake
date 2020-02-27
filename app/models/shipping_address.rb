@@ -4,5 +4,5 @@ class ShippingAddress < ApplicationRecord
 	validates :customer_id, presence: true
 	validates :name, presence: true
 	validates :postcode, presence: true
-	vakidates :address, presence: true
+	validates :address, presence: true
 end
