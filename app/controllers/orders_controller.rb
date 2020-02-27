@@ -14,7 +14,7 @@ class OrdersController < ApplicationController
     end
 
     def new
-        @addresses = ShppingAddress.where(customer_id: current_user.id)
+        @addresses = ShppingAddress.where(customer_id: current_customer.id)
     end
 
     def confirm
