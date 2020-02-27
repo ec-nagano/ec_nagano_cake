@@ -23,10 +23,10 @@
               <%= customer.email %>
             </td>
             <td>
-              <% if @customer.is_active == true %>
-                "有効"
+              <% if customer.is_active == true %>
+                有効
               <% else %>
-                "退会済"
+                退会済
               <% end %>
             </td>
           </tr>

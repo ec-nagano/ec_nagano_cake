@@ -2,57 +2,76 @@
 
 <div class="admin_customer_show">
 
-	<p class="admin_customer_label">
+	<p class="admin_customer_show">
 
         顧客ID
-        <%= @customer.id %>
-        <% if @customer.is_active == true %>
-        　"有効会員"
-        <% else %>
-        　"無効会員"
-        <% end %>
 
+        <label for="customer_show_label">
+          <%= @customer.id %>
+          <% if @customer.is_active == true %>
+        　  有効会員
+          <% else %>
+        　  無効会員
+          <% end %>
+        </label>
     </p>
 
 
-    <p class="admin_customer_label">
+    <p class="admin_customer_show">
 
         氏名
-        <%= @customer.first_name + @customer.last_name %>
+
+        <label for="customer_show_label">
+          <%= @customer.first_name + @customer.last_name %>
+        </label>
+
     </p>
 
-    <p class="admin_customer_label">
+    <p class="admin_customer_show">
 
         フリガナ
-      　<%= @customer.first_name_kana + @customer.last_name_kana %>
+
+        <label for="customer_show_label">
+      　  <%= @customer.first_name_kana + @customer.last_name_kana %>
+        </label>
+
     </p>
 
-    <p class="admin_customer_label">
+    <p class="admin_customer_show">
 
-        郵便番号
-        <%= @customer.postcode %>
+        <label for="customer_show_label">
+          郵便番号
+          <%= @customer.postcode %>
+        </label>
+
     </p>
 
-    <p class="admin_customer_label">
+    <p class="admin_customer_show">
 
-        住所
-        <%= @customer.address %>
+        <label for="customer_show_label">
+          住所
+          <%= @customer.address %>
+        </label>
     </p>
 
-    <p class="admin_customer_label">
+    <p class="admin_customer_show">
 
-        電話番号
-        <%= @customer.phone_number %>
+        <label for="customer_show_label">
+          電話番号
+          <%= @customer.phone_number %>
+        </label>
     </p>
 
-    <p class="admin_customer_label">
+    <p class="admin_customer_show">
 
-        メールアドレス
-        <%= @customer.email %>
+        <label for="customer_show_label">
+          メールアドレス
+          <%= @customer.email %>
+        </label>
     </p>
 
 </div>
 
 
 <%= link_to "編集する", edit_admin_customer_path(@customer), class:'btn btn-primary' %>
-<%= link_to "注文履歴一覧を見る", admin_orders, class:'btn btn-primary' %>
+<%= link_to "注文履歴一覧を見る", admin_orders_path, class:'btn btn-primary' %>

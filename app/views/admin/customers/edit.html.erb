@@ -5,7 +5,8 @@
 
   <%= @customer.id %>
 
-  <%= form_for(@customer) do |f| %>
+  <%= form_for(@customer, url: "/admin/customers/#{@customer.id}", :method=>:patch) do |f| %>
+
 
     <div class="customer_edit_field">
       <label for="customer_edit_label">氏名
@@ -30,7 +31,7 @@
 
     <div class="customer_edit_field">
 	   <label for="customer_edit_label">住所
-	    <%= f.text_field :adress %>
+	    <%= f.text_field :address %>
      </label>
     </div>
 
@@ -51,8 +52,8 @@
 
     <div class="customer_edit_field">
 	    <label for="customer_edit_label">会員ステータス
-	      <label for="edit_is_active_true"><%=f.radio_button :is_active, true %>"有効"</label>
-	      <label for="edit_is_active_false"><%=f.radio_button :is_active, false %>"退会済み"</label>
+	      <label for="edit_is_active_true"><%=f.radio_button :is_active, true %>有効</label>
+	      <label for="edit_is_active_false"><%=f.radio_button :is_active, false %>退会済み</label>
       </label>
     </div>
 
