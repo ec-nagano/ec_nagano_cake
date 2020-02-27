@@ -8,7 +8,7 @@
   <td><%= attachment_image_tag @product, :product_image, size:"200x200", format: 'jpeg' %>
   <%= @product.name %></td>
   <td><%= @product.content %></td>
-  <td><%= @product.price*108% %><li>(税込価格)></li></td>
+  <td><%= @product.(price * (1 + $tax_rate)).round %><li>(税込価格)></li></td>
 <!-- cart_itemのコントローラーのcreate actionを記述しました。 -->
   <%= form_for @cart_item,:url => {controller: "cart_item", action: "create"} do |f| %>
     <td><%= f.number_field :amount %></td>
