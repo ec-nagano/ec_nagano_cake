@@ -22,13 +22,18 @@
               <%= link_to product.name, admin_product_path(product) %>
             </td>
             <td>
+              <!-- ここは税抜価格の表示でOK -->
               <%= product.price %>
             </td>
             <td>
               <%= product.category.name %>
             </td>
             <td>
-              <%= product.is_active %>
+              <% if product.is_active == true %>
+                "販売中"
+              <% else %>
+                "販売停止中"
+              <% end %>
             </td>
           </tr>
         <% end %>
