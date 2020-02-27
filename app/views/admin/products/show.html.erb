@@ -31,7 +31,7 @@
 
     	税込価格（税抜価格）
     	<!-- 後からメソッドで税込価格を呼んでくる -->
-    	<%= @product.price * (1 + $tax_rate)).round %>(<%= @product.price %>)  円
+    	<%= (@product.price * (1 + $tax_rate)).round %>(<%= @product.price %>)  円
     </p>
 
     <p class="admin_product_label">
