@@ -1,0 +1,12 @@
+<img src="/assets/画像を用意する" alt="ケーキの画像", class="img_top_cake">
+
+<h1>おすすめ</h1>
+
+<%= @products.each do |p| %>
+	<%= link_to product_path(p.id) do %>
+		<%= attachment_image_tag(p, :product_image, :fill, 50, 50) %>
+		<%= p.name %>
+	<%= end %>
+<% end %>
+
+<%= link_to "商品一覧へ（ジャンル検索）", products_path %>
