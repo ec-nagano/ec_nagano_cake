@@ -1,8 +1,7 @@
 class ShippingAddressesController < ApplicationController
   def index
-    @shipping_addresses=Shipping_address.all
+    @shipping_addresses=Shipping_address.where(customer_id:params[:customer_id])
     @shipping_address=Shipping_address.new
-    # whereメゾットを使う
   end
 
   def edit
@@ -20,7 +19,7 @@ class ShippingAddressesController < ApplicationController
 
   def destroy
     @shipping_address=Shipping_address.find(params[:id])
-    @shipping_address=Shipping_address.find(params[:id])
+    @shipping_address.destroy
     redirect_to shipping_addresses_path
   end
 
@@ -32,6 +31,7 @@ class ShippingAddressesController < ApplicationController
       redirect_to shipping_addresses_path
     else
       render action: :index
+    end
   end
 
   def
