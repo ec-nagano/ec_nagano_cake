@@ -66,7 +66,14 @@
       </nav>
     </header>
 
-    <%= yield %>
+    <div class="body">
+      <div class="container">
+        <p class="notice"><%= notice %></p>
+        <div class="row">
+          <%= yield %>
+        </div>
+      </div>
+    </div>
 
     <footer class="footer">
       <div class="container">
