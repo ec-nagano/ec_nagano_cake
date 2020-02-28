@@ -17,6 +17,7 @@ class CartItemsController < ApplicationController
         end
     end
 
+    # 特定のcart_item一件を削除する
     def destroy
         cart_item = CartItem.find(params[:id])
         cart_item.destroy
@@ -25,16 +26,14 @@ class CartItemsController < ApplicationController
 
     def update
         cart_item = CartItem.find(params[:id])
-        cart_item.amount = params[:amount]
+        cart_item.update(cart_item_params)
         redirect_to(cart_items_path)
     end
 
-    # current_customerに紐付く、cart_itemsを全て取得し、eachメソッドで削除していく。
+    # current_customerに紐付く、cart_itemsを取得し、全件削除する。
     def items_destroy
         cart_items = CartItem.where(customer_id: current_customer.id)
-        cart_items.each do |e|
-            e.destroy
-        end
+        cart_items.destroy_all
         redirect_to(cart_items_path)
     end
 
@@ -44,7 +43,7 @@ class CartItemsController < ApplicationController
     end
 
     def ensure_correct_customer
-        @cart_item = Order.find(params[:id])
+        @cart_item = CartItem.find(params[:id])
         if cart_item.customer_id != current_customer.id
             flash[:notice] = "権限がありません"
             redirect_to("/customers/#{current_customer.id}")
