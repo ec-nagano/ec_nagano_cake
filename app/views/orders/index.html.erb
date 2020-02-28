@@ -23,7 +23,7 @@
                 <td>
                     <%# orderに紐づけられたordered_itemsを取得し、名前のみ表示 %>
                     <% order.ordered_items.each do |ordered_item| %>
-                        <%= ordered_item.name %>
+                        <%= ordered_item.product.name %><br>
                     <% end %>
                 </td>
                 <td><%= order.delivery_fee + order.billing_amount %></td>
