@@ -16,11 +16,11 @@
     </tr>
     <tr>
         <th>支払方法</th>
-        <td><%= @order[:payment] %></td>
+        <td><%= @order.payment %></td>
     </tr>
     <tr>
         <th>ステータス</th>
-        <td><%= @order[:status] %></td>
+        <td><%= @order.status %></td>
     </tr>
 </table>
 
@@ -43,18 +43,21 @@
 <h3>注文内容</h3>
 <table>
     <thead>
-        <tr>商品</tr>
-        <tr>単価（税込）</tr></tr>
-        <tr>個数</tr>
-        <tr>小計</tr>
+        <tr>
+            <th>商品</th>
+            <th>単価（税込）</th>
+            <th>個数</th>
+            <th>小計</th>
+    </tr>
     </thead>
-
     <tbody>
         <%= @ordered_items.each do |ordered_item| %>
-            <tr><%= ordered_item.name %></tr>
-            <tr><%= ordered_item.price %></tr>
-            <tr><%= ordered_item.amount %></tr>
-            <tr><%= ordered_item.price * ordered_item.amount %></tr>
+            <tr>
+                <td><%= ordered_item.name %></td>
+                <td><%= ordered_item.price %></td>
+                <td><%= ordered_item.amount %></td>
+                <td><%= ordered_item.price * ordered_item.amount %></td>
+            </tr>
         <% end %>
     </tbody>
 </table>

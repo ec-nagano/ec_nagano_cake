@@ -4,39 +4,43 @@
 
 <table class="table table-hover table-inverse">
     <thead>
-        <tr>商品名</tr>
-        <tr>単価（税込）</tr>
-        <tr>数量</tr>
-        <tr>小計</tr>
-        <tr></tr>
+        <tr>
+            <th>商品名</th>
+            <th>単価（税込）</th>
+            <th>数量</th>
+            <th>小計</th>
+        </tr>
     </thead>
     <tbody>
         <% total_price = 0%>
         <% @cart_items.each do |cart_item| %>
             <tr>
-                <%= link_to(product_path(cart_item.id)) do %>
-                    <%= attachment_image_tag(cart_item.product, :product_image, :fill, 30, 30) %>
-                    <%= cart_item.product.name %>
-                <% end %> 
-            </tr>
-            <tr>
-                <%= (cart_item.price * (1 + $tax_rate)).round %>
-            </tr>
-            <tr>
-                <%= form_with(model: cart_item, url: cart_item_path(cart_item.id), method: :patch) do |f| %>
-                    <%= f.number_field :amount %>
-                    <%= f.submit '変更' %>
-                <% end %>
-            </tr>
-            <tr>
-                <%# 商品ごとの小計を計算 %>
-                <% sub_total = (cart_item.price * (1 + $tax_rate)).round * cart_item.amount %>
-                <%= sub_total %>
-                <%# 合計金額を計算 %>
-                <% total_price += sub_total %>
-            </tr>
-            <tr>
-                <%= link_to("削除する", cart_item_path(cart_item.id), method: :delete, class: "btn btn-danger") %>
+                <td>
+                    <%= link_to(product_path(cart_item.id)) do %>
+                        <%= attachment_image_tag(cart_item.product, :product_image, :fill, 30, 30) %>
+                        <%= cart_item.product.name %>
+                    <% end %> 
+                </td>
+                <td>
+                    <%= (cart_item.product.price * (1 + $tax_rate)).round %>
+                </td>
+                <td>
+                    <%= form_with(model: cart_item, url: cart_item_path(cart_item.id), method: :patch) do |f| %>
+                        <%= f.number_field :amount %>
+                        <%= f.hidden_field :product_id, value: cart_item.id %>
+                        <%= f.submit '変更' %>
+                    <% end %>
+                </td>
+                <td>
+                    <%# 商品ごとの小計を計算 %>
+                    <% sub_total = (cart_item.product.price * (1 + $tax_rate)).round * cart_item.amount %>
+                    <%= sub_total %>
+                    <%# 合計金額を計算 %>
+                    <% total_price += sub_total %>
+                </td>
+                <td>
+                    <%= link_to("削除する", cart_item_path(cart_item.id), method: :delete, class: "btn btn-danger") %>
+                </td>
             </tr>
         <% end %>
     </tbody>

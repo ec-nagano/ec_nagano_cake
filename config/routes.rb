@@ -28,9 +28,9 @@ Rails.application.routes.draw do
   resources :cart_items, only: [:index, :create, :destroy, :update]
   delete 'cart_items' => 'cart_items#items_destroy'
   # ordersコントローラ
-  resources :orders, only: [:index, :show, :new, :create]
   post 'orders/cofirm' => 'orders#confirm'
   get 'orders/thanks' => 'orders#thanks'
+  resources :orders, only: [:index, :show, :new, :create]
   # 管理側
   namespace :admin do
 	  # admin/admins(devise)コントローラ
