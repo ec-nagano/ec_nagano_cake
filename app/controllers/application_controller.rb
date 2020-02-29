@@ -26,4 +26,5 @@ before_action :configure_permitted_parameters, if: :devise_controller?
 			new_admin_session_path
 		end
 	end
+	Refile.secret_key = '5b6cc0f4e3a9c624f19437b916a8e775e146fa3e3ba083fd49e6bc3fbcc30a2e873e4430e78295df77219ba3a4c44f5e8438cae94e20d54f24129855b688038c'
 	end
