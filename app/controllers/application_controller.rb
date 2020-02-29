@@ -26,3 +26,4 @@ before_action :configure_permitted_parameters, if: :devise_controller?
 			new_admin_session_path
 		end
 	end
+	end
