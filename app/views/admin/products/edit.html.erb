@@ -1,5 +1,11 @@
 <h3> 商品 編集画面 </h3>
 
+<% if @product.errors.any? %>
+　  <div id="error_explanation">
+      <h4>【 入力されていない項目があります。 】</h4>
+  　</div>
+<% end %>
+
 <div class="admin_product_edit">
 
   <%= form_for(@product, url: "/admin/products/#{@product.id}", :method=>:patch) do |f| %>
