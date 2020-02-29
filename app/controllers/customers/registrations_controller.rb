@@ -22,7 +22,14 @@ class Customers::RegistrationsController < Devise::RegistrationsController
   # PUT /resource
 
   def update
-     self.resource = resource_class.to_adapter.get!(send(:"current_#{resource_name}").to_key)
+    if params[:unsubscribing] == "true"
+      customer = current_customer
+      customer.update(is_active: false)
+      sign_out_and_redirect(root_path)
+      return
+    end
+    
+    self.resource = resource_class.to_adapter.get!(send(:"current_#{resource_name}").to_key)
     prev_unconfirmed_email = resource.unconfirmed_email if resource.respond_to?(:unconfirmed_email)
 
     resource_updated = update_resource(resource, account_update_params)
@@ -36,13 +43,6 @@ class Customers::RegistrationsController < Devise::RegistrationsController
       clean_up_passwords resource
       set_minimum_password_length
       respond_with resource
-    end
-
-    if params[:unsubscribing] == true
-      customer = current_customer
-      customer.is_active = false
-      customer.update
-      redirect_to(destroy_customer_session_path, method: :delete)
     end
   end
 
