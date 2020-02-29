@@ -26,7 +26,9 @@ class CartItemsController < ApplicationController
 
     def update
         cart_item = CartItem.find(params[:id])
-        cart_item.update(cart_item_params)
+        if cart_item.update(cart_item_params)
+            flash[:notice] = "#{cart_item.product.name}の数量を変更しました"
+        end
         redirect_to(cart_items_path)
     end
 
@@ -43,7 +45,7 @@ class CartItemsController < ApplicationController
     end
 
     def ensure_correct_customer
-        @cart_item = CartItem.find(params[:id])
+        cart_item = CartItem.find(params[:id])
         if cart_item.customer_id != current_customer.id
             flash[:notice] = "権限がありません"
             redirect_to("/customers/#{current_customer.id}")
