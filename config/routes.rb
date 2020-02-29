@@ -17,8 +17,8 @@ Rails.application.routes.draw do
   root 'homes#top'
   get 'about' => 'homes#about'
   # customersコントローラ-
-  get '/customer/confim_unsubscribing' => 'customers#confirm_unsubscribing'
-  get 'customer/:id' => 'customers#show'
+  get '/customer/confirm_unsubscribing' => 'customer#confirm_unsubscribing'
+  get '/customer/:id' => 'customers#show'
 
   # shipping_addressesコントローラ
   resources :shipping_addresses, only: [:index, :edit, :update, :destroy, :create]
