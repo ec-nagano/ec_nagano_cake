@@ -1,5 +1,11 @@
 <h3> ジャンル編集画面 </h3>
 
+<% if @category.errors.any? %>
+　　<div id="error_explanation">
+      <h4>【 入力されていない項目があります。 】</h4>
+  　</div>
+<% end %>
+
 <div class="admin_category_edit">
 
     <%= form_for(@category, :url => {:action => :update}) do |f| %>
@@ -8,9 +14,12 @@
         <label for="category_edit_label">ジャンル
           <%= f.text_field :name %>
         </label>
-        <!-- ラジオボタン -->
-        <label for="category_edit_is_active_true"><%=f.radio_button :is_active, true %>有効</label>
-        <label for="category_edit_is_active_false"><%=f.radio_button :is_active, false %>無効</label>
+
+          <!-- ラジオボタン -->
+          <label for="category_edit_is_active_true"><%=f.radio_button :is_active, true %>有効</label>
+          <label for="category_edit_is_active_false"><%=f.radio_button :is_active, false %>無効</label>
+
+      </div>
 
         <%= f.submit("変更を保存する", class: "btn btn-primary") %>
 

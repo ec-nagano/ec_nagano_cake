@@ -1,48 +1,57 @@
 <h3> ジャンル追加・一覧画面 </h3>
 
-  <div class="admin_category_new">
+<% if @category.errors.any? %>
+　　<div id="error_explanation">
+      <h4>【 入力されていない項目があります。 】</h4>
+  　</div>
+<% end %>
 
-    <%= form_for(@category, :url => {:action => :create}) do |f| %>
+<div class="admin_category_new">
 
-      <div class="category_new_field"><!-- このdivの中にフォームから追加ボタンまでを全て実装 -->
-        <label for="category_new_label">ジャンル
-          <%= f.text_field :name %>
-        </label>
-        <!-- ラジオボタン -->
-        <label for="category_new_is_active_true"><%=f.radio_button :is_active, true %>有効</label>
-        <label for="category_new_is_active_false"><%=f.radio_button :is_active, false %>無効</label>
-        <%= f.submit("追加", class: "btn btn-primary") %>
-      </div>
+  <%= form_for(@category, :url => {:action => :create}) do |f| %>
 
-    <% end %>
-  </div>
+    <div class="category_new_field"><!-- このdivの中にフォームから追加ボタンまでを全て実装 -->
+      <label for="category_new_label">ジャンル
+        <%= f.text_field :name %>
+      </label>
 
-  <table class="table table-hover table-inverse">
-    <thead>
-        <tr>
-          <th>ジャンル</th>
-          <th>状態</th>
-        </tr>
+      <!-- ラジオボタン -->
+      <label for="category_new_is_active_true"><%=f.radio_button :is_active, true %>有効</label>
+      <label for="category_new_is_active_false"><%=f.radio_button :is_active, false %>無効</label>
+
+      <%= f.submit("追加", class: "btn btn-primary") %>
+    </div>
+
+  <% end %>
+
+</div>
+
+<table class="table table-hover table-inverse">
+  <thead>
+    <tr>
+      <th>ジャンル</th>
+      <th>状態</th>
+    </tr>
     </thead>
 
-    <tbody>
+  <tbody>
 
-        <% @categories.each do |category| %>
-          <tr>
-            <td>
-              <%= category.name %>
-            </td>
-            <td>
-              <% if @category.is_active == true %>
-        　      "有効"
-              <% else %>
-              　"無効"
-              <% end %>
-            </td>
-            <td>
-                <%= link_to("編集", edit_admin_category_path(category), class:'btn btn-primary') %>
-            </td>
-          </tr>
-        <% end %>
-    </tbody>
-  </table>
+    <% @categories.each do |category| %>
+      <tr>
+        <td>
+          <%= category.name %>
+        </td>
+        <td>
+          <% if @category.is_active == true %>
+            有効
+          <% else %>
+            無効
+          <% end %>
+          </td>
+          <td>
+            <%= link_to("編集", edit_admin_category_path(category), class:'btn btn-primary') %>
+          </td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>

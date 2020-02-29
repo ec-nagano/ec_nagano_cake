@@ -1,5 +1,11 @@
 <h3> 商品　新規登録画面 </h3>
 
+<% if @product.errors.any? %>
+　  <div id="error_explanation">
+      <h4>【 入力されていない項目があります。 】</h4>
+  　</div>
+<% end %>
+
 <div class="admin_product_new">
 
 <%= form_for(@product, url: '/admin/products') do |f| %>
