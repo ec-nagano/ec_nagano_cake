@@ -5,7 +5,6 @@
 <p>支払方法 <%= @order.payment %></p>
 <p>
 	注文ステータス
-	<%= @order.status_before_type_cast %>
 	<%= form_with model: @order, url: admin_order_path, local: true do |f| %>
 		<%= f.select :status, [["入金待ち", 0], ["入金確認", 1], ["製作中", 2], ["発送準備中", 3], ["発送済み", 4]], :selected => @order.status_before_type_cast %>
 		<%= f.submit "更新" %>
@@ -24,7 +23,6 @@
 	<% sum = 0 %>
 	<% @ordered_items.each do |item| %>
 		<tr>
-		<%= item.status_before_type_cast %>
 			<td><%= item.product.name %></td>
 			<!-- 税込計算は後日 -->
 			<td><%= (item.price * (1 + $tax_rate)).round %></td>
