@@ -37,7 +37,7 @@ class OrdersController < ApplicationController
         when 0
             @postcode = current_customer.postcode
             @address = current_customer.address
-            @recipient = current_customer.first_name + ' ' + current_customer.last_nam
+            @recipient = current_customer.first_name + ' ' + current_customer.last_name
         # "登録済み住所"の場合
         when 1
             address = ShippingAddress.find(params[:existing_address])
@@ -58,7 +58,6 @@ class OrdersController < ApplicationController
             @address = address.address
             @recipient = address.name
         end
-        params[:order][:delivery_fee] = $delivery_fee
         # 請求額を計算する処理
         @billing_amount = 0
         @cart_items.each do |e|
