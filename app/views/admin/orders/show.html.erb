@@ -1,13 +1,14 @@
 <h1>注文詳細画面</h1>
 
 <p>購入者 <%= @customer.first_name + @customer.last_name %></p>
-<p>配送先 <%= @order.adress %><%= @order.recipient %></p>
+<p>配送先 <%= @order.address %><%= @order.recipient %></p>
 <p>支払方法 <%= @order.payment %></p>
 <p>
 	注文ステータス
-	<%= form_with model: @order do |f| %>
-		<%= f.select :status, [["入金待ち", 0], ["入金確認", 1], ["製作中", 2], ["発送準備中", 3], ["発送済み", 4]], { selected: @order.status }, {} %>
-		<%= f.submit　"更新" %>
+	<%= @order.status_before_type_cast %>
+	<%= form_with model: @order, url: admin_order_path, local: true do |f| %>
+		<%= f.select :status, [["入金待ち", 0], ["入金確認", 1], ["製作中", 2], ["発送準備中", 3], ["発送済み", 4]], :selected => @order.status_before_type_cast %>
+		<%= f.submit "更新" %>
 	<% end %>
 </p>
 
@@ -21,8 +22,9 @@
 	</tr>
 
 	<% sum = 0 %>
-	<%= @ordered_items.each do |item| %>
+	<% @ordered_items.each do |item| %>
 		<tr>
+		<%= item.status_before_type_cast %>
 			<td><%= item.product.name %></td>
 			<!-- 税込計算は後日 -->
 			<td><%= (item.price * (1 + $tax_rate)).round %></td>
@@ -30,11 +32,11 @@
 			<td><%= (item.price * (1 + $tax_rate)).round * item.amount %></td>
 			<% sum += (item.price * (1 + $tax_rate)).round * item.amount %>
 			<td>
-				<!-- controllerにparamsを渡したいだけの時はmodelと紐つけない？url: admin_order_path -->
-				<%= form_with model: item do |f| %>
-					<%= f.select :status, [["着手不可", 0], ["製作待ち", 1], ["製作中", 2], ["製作完了", 3]], { selected: item.status }, {} %>
-					<% f.hidden_field :item_id, value: item.id %>
-					<%= f.submit　"更新" %>
+				<%= form_with model: item, url: admin_order_path, local: true do |f| %>
+					<%= f.select :status, [["着手不可", 0], ["製作待ち", 1], ["製作中", 2], ["製作完了", 3]], { selected: item.status_before_type_cast } %>
+					<%= f.hidden_field :item_id, value: item.id %>
+					<%= f.submit "更新" %>
+				<% end %>
 			</td>
 		</tr>
 	<% end %>
