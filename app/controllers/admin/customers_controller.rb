@@ -1,5 +1,9 @@
 class Admin::CustomersController < ApplicationController
-	def index
+
+    before_action :authenticate_admin!
+
+
+    def index
         @customers = Customer.order(created_at: :asc).page(params[:page])
 	end
 
