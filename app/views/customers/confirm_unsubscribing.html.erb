@@ -4,7 +4,7 @@
 これまでの購入履歴が閲覧できなくなります。
 退会する場合は、「退会する」をクリックしてください。</h2>
 <div>
-	<%= link_to '退会しない',customer_path(@customer.id) %>
+	<%= link_to '退会しない',"/customer/#{@customer.id}" %>
 </div>
 <div>
 	<%= link_to '退会する', customer_registration_path(unsubscribing: true), {method: :PATCH} %>

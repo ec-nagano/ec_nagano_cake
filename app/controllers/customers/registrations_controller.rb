@@ -25,10 +25,12 @@ class Customers::RegistrationsController < Devise::RegistrationsController
     if params[:unsubscribing] == "true"
       customer = current_customer
       customer.update(is_active: false)
-      sign_out_and_redirect(root_path)
+      sign_out
+      flash[:notice] = "退会済みです"
+      redirect_to root_path
       return
     end
-    
+
     self.resource = resource_class.to_adapter.get!(send(:"current_#{resource_name}").to_key)
     prev_unconfirmed_email = resource.unconfirmed_email if resource.respond_to?(:unconfirmed_email)
 
@@ -45,6 +47,7 @@ class Customers::RegistrationsController < Devise::RegistrationsController
       respond_with resource
     end
   end
+
 
   # DELETE /resource
   # def destroy
