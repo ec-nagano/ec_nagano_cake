@@ -13,6 +13,6 @@ class Customer < ApplicationRecord
   validates :first_name_kana, presence: true
   validates :last_name_kana, presence: true
   validates :address, presence: true
-  validates :postcode, presence: true
-  validates :phone_number, presence: true
+  validates :postcode, presence: true, length: { minimum: 7 }, numericality: { only_integer: true }
+  validates :phone_number, presence: true, length: { minimum: 9 }, numericality: { only_integer: true }
 end
