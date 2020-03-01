@@ -13,9 +13,10 @@ class HomesController < ApplicationController
 	private
 	# 退会済みのcustomerを判定
 	def ensure_active_customer
-		if customer_signed_in? && current_customer.is_active = 0
-			sign_out_and_redirect(root_path)
+		if customer_signed_in? && current_customer.is_active == false
+			sign_out
 			flash[:notice] = "退会済みです"
+			redirect_to about_path
 		end
 	end
 end
