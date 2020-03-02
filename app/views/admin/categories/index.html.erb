@@ -11,15 +11,17 @@
   <%= form_for(@category, :url => {:action => :create}) do |f| %>
 
     <div class="category_new_field"><!-- このdivの中にフォームから追加ボタンまでを全て実装 -->
-      <label for="category_new_label">ジャンル
-        <%= f.text_field :name %>
-      </label>
+      <span class="category_new">ジャンル</span>
+      <span class="category_new"><%= f.text_field :name %></span>
 
-      <!-- ラジオボタン -->
-      <label for="category_new_is_active_true"><%=f.radio_button :is_active, true %>有効</label>
-      <label for="category_new_is_active_false"><%=f.radio_button :is_active, false %>無効</label>
+      <span class="category_new">
+        <!-- ラジオボタン -->
+        <label for="category_new_is_active_true"><%=f.radio_button :is_active, true %>有効</label>
+        <label for="category_new_is_active_false"><%=f.radio_button :is_active, false %>無効</label>
+      </span>
 
       <%= f.submit("追加", class: "btn btn-primary") %>
+
     </div>
 
   <% end %>
@@ -28,9 +30,10 @@
 
 <table class="table table-hover table-inverse">
   <thead>
-    <tr>
+    <tr class="active">
       <th>ジャンル</th>
       <th>状態</th>
+      <th></th>
     </tr>
     </thead>
 
@@ -55,3 +58,9 @@
     <% end %>
   </tbody>
 </table>
+
+<style>
+  h3 { margin: 0 0 40px 0px; }
+  .category_new_field { margin-bottom: 30px; }
+  .category_new { margin-right: 5px; }
+</style>
