@@ -10,20 +10,24 @@
 
     <%= form_for(@category, :url => {:action => :update}) do |f| %>
 
-      <div class="category_edit_field"><!-- このdivの中にフォームから保存ボタンまでを全て実装 -->
-        <label for="category_edit_label">ジャンル
-          <%= f.text_field :name %>
-        </label>
+      <span class="category_edit">ジャンル</span>
+      <span class="category_edit"><%= f.text_field :name %></span>
 
-          <!-- ラジオボタン -->
-          <label for="category_edit_is_active_true"><%=f.radio_button :is_active, true %>有効</label>
-          <label for="category_edit_is_active_false"><%=f.radio_button :is_active, false %>無効</label>
+      <span class="category_edit">
+        <!-- ラジオボタン -->
+        <label for="category_edit_is_active_true"><%=f.radio_button :is_active, true %>有効</label>
+        <label for="category_edit_is_active_false"><%=f.radio_button :is_active, false %>無効</label>
 
-      </div>
+      </span>
 
-        <%= f.submit("変更を保存する", class: "btn btn-primary") %>
+      <span class="category_edit"><%= f.submit("変更を保存する", class: "btn btn-primary") %></span>
 
-      </div>
+</div>
 
     <% end %>
 </div>
+
+<style>
+  h3 { margin: 0 0 40px 0px; }
+  .category_edit { margin-right: 15px; }
+</style>
