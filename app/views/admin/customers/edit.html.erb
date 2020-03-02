@@ -9,61 +9,54 @@
 <div class="customer_edit">
 
   <div class="customer_edit_field">
-    <label for="customer_edit_label">会員ID
-      <%= @customer.id %>
-    </label>
+    <span class="customer_edit_title">会員ID</span>
+    <span class="customer_edit_content"><%= @customer.id %></span>
   </div>
+
 
   <%= form_for(@customer, url: "/admin/customers/#{@customer.id}", :method=>:patch) do |f| %>
 
+  <div class="customer_edit_field">
+    <span class="customer_edit_title">氏名</span>
+    <span class="customer_edit_content"><%= f.text_field :first_name %><%= f.text_field :last_name %></span>
+  </div>
 
   <div class="customer_edit_field">
-　  <label for="customer_edit_label">氏名
-      <%= f.text_field :first_name %><%= f.text_field :last_name %>
-    </label>
+    <span class="customer_edit_title">フリガナ</span>
+	  <span class="customer_edit_content"><%= f.text_field :first_name_kana %><%= f.text_field :last_name_kana %></span>
   </div>
 
 
   <div class="customer_edit_field">
-    <label for="customer_edit_label">フリガナ
-	    <%= f.text_field :first_name_kana %><%= f.text_field :last_name_kana %>
-    </label>
+	  <span class="customer_edit_title">郵便番号</span>
+    <span class="customer_edit_content"><%= f.text_field :postcode %></span>
   </div>
 
 
   <div class="customer_edit_field">
-	  <label for="customer_edit_label">郵便番号
-	    <%= f.text_field :postcode %>
-    </label>
+	  <span class="customer_edit_title">住所</span>
+	  <span class="customer_edit_content"><%= f.text_field :address %></span>
   </div>
 
 
   <div class="customer_edit_field">
-	  <label for="customer_edit_label">住所
-	    <%= f.text_field :address %>
-    </label>
+	  <span class="customer_edit_title">電話番号</span>
+	  <span class="customer_edit_content"><%= f.telephone_field :phone_number %></span>
   </div>
 
 
   <div class="customer_edit_field">
-	  <label for="customer_edit_label">電話番号
-	    <%= f.telephone_field :phone_number %>
-    </label>
+	  <span class="customer_edit_title">メールアドレス</span>
+	  <span class="customer_edit_content"><%= f.email_field :email %></span>
   </div>
 
 
   <div class="customer_edit_field">
-	  <label for="customer_edit_label">メールアドレス
-	    <%= f.email_field :email %>
-    </label>
-  </div>
-
-
-  <div class="customer_edit_field">
-	  <label for="customer_edit_label">会員ステータス
-	    <label for="edit_is_active_true"><%=f.radio_button :is_active, true %>有効</label>
-	    <label for="edit_is_active_false"><%=f.radio_button :is_active, false %>退会済み</label>
-    </label>
+    <span class="customer_edit_title">会員ステータス</span>
+    <span class="customer_edit_content">
+	      <label for="edit_is_active_true"><%=f.radio_button :is_active, true %>有効</label>
+	      <label for="edit_is_active_false"><%=f.radio_button :is_active, false %>退会済み</label>
+    </span>
   </div>
 
   <div class="customer_edit_action">
@@ -73,3 +66,9 @@
   <% end %>
 
 </div>
+
+<style>
+  h3{ margin-bottom: 40px; }
+  .customer_edit_field { margin-bottom: 20px; }
+  .customer_edit_title { display: inline-block; width: 150px; }
+  .customer_edit_action { position: relative; top: 20px;}
