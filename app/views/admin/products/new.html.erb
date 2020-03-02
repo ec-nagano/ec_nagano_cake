@@ -11,10 +11,13 @@
 
       <%= form_for(@product, url: '/admin/products') do |f| %>
 
-	    <div class="col-sm-4">
-	      <%= f.attachment_field :product_image %>
-	      <!-- 画像選択ボタンにbootstrapをかける -->
-	      <!-- この上にプレビュー画像を実装する -->
+	    <div class="col-sm-3"> <!-- プレビュー画面を実装 -->
+        <div class="view_box">
+          <label for="product_product_image" class="file_field btn">
+            ファイルを選択
+            <%= f.attachment_field :product_image, type: 'file', class:'file' %>
+          </label>
+        </div>
       </div>
 
       <div class="col-sm-5">
@@ -49,7 +52,7 @@
 
       </div>
 
-        <div class="col-sm-3">
+        <div class="col-sm-4">
           <div class="product_new_action">
   	        <%= f.submit("新規登録", class: "btn btn-primary") %>
           </div>
@@ -59,10 +62,12 @@
   </div>
 
   <style>
-
+    .col-sm-5 { position: relative; top: 40px; }
+    .file_field input { display: none;}
+    .file_field{ background: #337ab7; color: #FFFFFF; display: inline-block; margin : 0px 0 10px 0; }
     h3 {  margin: 0 0 0 10px ; }
     .row { margin: 45px 0 0 30px ; }
-    input[type="file"] { display: block; font-size: 15px; margin-top: 50px; }
+    .view_box { display: block; font-size: 15px; position: relative; right: 50px; }
     .product_new_field { margin: 0 0 20px; font-size: 15px; }
     .new_title {display: inline-block; width: 150px; }
     .new_content {display: inline-block; width: 200px;}
