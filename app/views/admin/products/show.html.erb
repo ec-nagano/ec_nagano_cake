@@ -1,47 +1,65 @@
+
 <h3> 商品　詳細画面 </h3>
 
-<div class="admin_product_show">
+<div class="container">
+    <div class="row">
+        <div class="col-sm-4">
+            <div class="admin_product_show_image">
+                <%= attachment_image_tag @product, :product_image, :fill, 250, 200, format: 'jpeg', fallback: "no_image.jpg", size: '250x200' %>
+            </div>
+        </div>
 
-	<div class="admin_product_show_image">
-	  <%= attachment_image_tag @product, :product_image, :fill, 250, 200, format: 'jpeg', fallback: "no_image.jpg", size: '250x200' %>
+        <div class="col-sm-5">
+
+            <h5>
+                <span class="title">商品名</span>
+                <span class="content"><%= @product.name %></span>
+            </h5>
+
+
+            <h5>
+                <span class="title">商品説明</span>
+                <span class="content"><%= @product.content %></span>
+            </h5>
+
+
+            <h5>
+                <span class="title">ジャンル</span>
+                <span class="content"><%= @product.category.name %></span>
+            </h5>
+
+            <h5>
+                <span class="title">税込価格（税抜価格）</span>
+                <span class="content"><%= (@product.price * (1 + $tax_rate)).round %> &nbsp; ( <%= @product.price %> )&nbsp;円</span>
+            </h5>
+
+            <h5>
+                <span class="title">販売ステータス</span>
+                <span class="content">
+
+                    <% if @product.is_active == true %>
+                    販売中
+                    <% else %>
+        　          売り切れ
+                    <% end %>
+
+                </span>
+            </h5>
+        </div>
+
+        <div class="col-sm-3">
+          <%= link_to "編集する", edit_admin_product_path(@product), class:'btn btn-primary' %>
+        </div>
     </div>
-
-    <p class="admin_product_label">
-
-        商品名
-        <%= @product.name %>
-
-    </p>
-
-
-    <p class="admin_product_label">
-
-    	商品説明
-    	 <%= @product.content %>
-    </p>
-
-
-    <p class="admin_product_label">
-
-    	ジャンル
-    	<%= @product.category.name %>
-    </p>
-
-    <p class="admin_product_label">
-
-    	税込価格（税抜価格）
-    	<!-- 後からメソッドで税込価格を呼んでくる -->
-    	<%= (@product.price * (1 + $tax_rate)).round %>(<%= @product.price %>)  円
-    </p>
-
-    <p class="admin_product_label">
-    	<% if @product.is_active == true %>
-        　販売中
-        <% else %>
-        　売り切れ
-        <% end %>
-    </p>
-
-    <%= link_to "編集する", edit_admin_product_path(@product), class:'btn btn-primary' %>
-
 </div>
+
+<style>
+
+    h3  { margin: 0 0 0 10px ; }
+    .row { margin: 45px 0 0 30px ; }
+    h5 { margin: 0 0 28px; font-size: 15px; }
+    .title {display: inline-block; width: 200px; }
+    .content {display: inline-block; width: 200px;}
+    .btn-primary { position: relative; top: 250px; left: 120px ;}
+
+</style>

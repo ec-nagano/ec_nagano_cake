@@ -1,14 +1,16 @@
 <h3>
-  商品一覧画面
+
+   商品一覧画面
    <label for="product_index_label">
-     <%= link_to "" ,new_admin_product_path, class:'glyphicon glyphicon-plus' %>
+     <%= link_to "" ,new_admin_product_path, class:'glyphicon glyphicon-plus-sign' %>
    </label>
+
 </h3>
 
 
 <table class="table table-hover table-inverse">
     <thead>
-      <tr>
+      <tr class="active">
           <th>商品ID</th>
           <th>商品名</th>
           <th>税抜価格</th>
@@ -47,3 +49,7 @@
 </table>
 
 <%= paginate @products, class: "paginate" %>
+
+<style>
+  .glyphicon-plus-sign:before { margin: 0 0 0 790px; color: #CC9966;}
+</style>
