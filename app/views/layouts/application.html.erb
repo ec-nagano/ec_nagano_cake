@@ -49,6 +49,9 @@
                 <li>
                   <%= link_to("ジャンル管理", admin_categories_path) %>
                 </li>
+                <li>
+                  <%= link_to("ログアウト", destroy_admin_session_path, method: :delete) %>
+                </li>
               <% else %>
                 <li>
                   <%= link_to("ながのCAKEについて", about_path) %>
