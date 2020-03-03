@@ -1,34 +1,114 @@
-<h1>配属先登録/一覧</h1>
-<%= form_for(@shipping_address) do |f| %>
-<h1>郵便番号</h1>
-<%= f.text_field :postcode %>
-<h1>住所</h1>
-<%= f.text_field :address %>
-<h1>宛名</h1>
-<%= f.text_field :name %>
-<%= f.submit '登録する' %>
-<% end %>
-<table>
-	<thead>
-		<tr>
-			<th>郵便番号</th>
-			<th>住所</th>
-			<th>宛名</th>
-			<th colspan="2"></th>
-		</tr>
-	</thead>
-	<tbody>
-	 <% @shipping_addresses.each do |shipping_address| %>
-      <tr>
-      <td><%= shipping_address.postcode %></td>
-      <td><%= shipping_address.address %></td>
-      <td><%= shipping_address.name %></td>
-      <td><%= link_to '編集', edit_shipping_address_path(shipping_address.id) %></td>
-      <td><%= link_to '削除', shipping_address_path(shipping_address.id), method: :delete %></td>
-      <% end %>
-	  </tr>
-	</tbody>
-</table>
+<div class="container">
+  <div class="row">
+  	<div class="col-sm-9">
+  		<h3>配属先登録/一覧</h3>
+	  	 <table class="create" >
+			 <%= form_for(@shipping_address) do |f| %>
+			  <tr>
+			  	<th>郵便番号</th><td><%= f.text_field :postcode,class: "col-sm-3" %></td>
+		     	</tr>
+			<tr>
+				<th>住所</th>
+				<td><%= f.text_field :address,class: "col-sm-12" %></td>
+			</tr>
+			<tr>
+				<th>宛名</th>
+				<td><%= f.text_field :name,class: "col-sm-4" %></td>
+			</tr>
+		</table>
+		</div>
+		<div class="col-sm-3">
+		<div class="btn"><%= f.submit '登録する',class: "btn btn-primary 20px "%></div>
+		<% end %>
+	</div>
+</div>
+ <div class="row">
+ 	<div class="col-sm-9">
+ 		<table class="index">
+			<thead>
+				<tr>
+					<th class="postcode">郵便番号</th>
+					<th class="address">住所</th>
+					<th class="name">宛名</th>
+					<th></th>
+				</tr>
+			</thead>
+<!--bootstrapのbtnを使うとpaddingが効かなくなり底にはりついてます。 -->
+				<tbody>
+				 <% @shipping_addresses.each do |shipping_address| %>
+			      <tr>
+			      <td><%= shipping_address.postcode %></td>
+			      <td><%= shipping_address.address %></td>
+			      <td><%= shipping_address.name %></td>
+			      <td>
+			      	<div class="btn"><%= link_to '編集する', edit_shipping_address_path(shipping_address.id),class: "btn btn-primary 20px" %>
+			          <%= link_to '削除する', shipping_address_path(shipping_address.id), method: :delete,class: "btn btn-danger 20px" %>
+			          </div>
+			      </td>
+			      <% end %>
+				  </tr>
+				</tbody>
+			</table>
+		</div>
+	</div>
+</div>
+
+<style>
+.row  {
+margin-bottom: 100px;
+ }
+
+.create {
+width: 100%;
+}
+
+.create th {
+border: 1px solid #ccc;
+padding: 10px;
+font-size: 18px;
+background-color: #dedede;
+width: 100px;
+}
+
+.create td {
+border: 1px solid #ccc;
+padding: 10px;
+font-size: 18px;
+width: 250px;
+}
+
+.btn{
+	margin-top: 85px;
+}
+
+.index {
+width: 90%;
+}
+
+.index th {
+border: 1px solid #ccc;
+padding: 10px;
+font-size: 18px;
+background-color: #dedede;
+}
+
+.postcode{
+	width: 100px;
+}
+.address{
+	width: 300px;
+}
+.name{
+	width: 100px;
+}
+.btn{
+	 display: inline-block;
+}
+.index td {
+border: 1px solid #ccc;
+font-size: 18px;
+}
 
 
+</style>
 

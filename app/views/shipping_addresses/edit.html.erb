@@ -1,10 +1,54 @@
-<h1>配送先編集</h1>
+<div class="container">
+  <div class="row">
+  	 <div class="col-sm-9">
+  	<table class="box">
  <%= form_for(@shipping_address) do |f| %>
- <span>郵便番号</span>
- <span><%= f.text_field :postcode %></span>
- <span>住所</span>
- <span><%= f.text_field :address %></span>
- <span>宛名</span>
- <span><%= f.text_field :name %></span>
- <%= f.submit '編集する' %>
+ <tr>
+ 	<th>郵便番号</th>
+    <td><%= f.text_field :postcode,class: "col-sm-3" %></td>
+</tr>
+<tr>
+	<th>住所</th>
+	<td><%= f.text_field :address,class: "col-sm-12" %></td>
+</tr>
+<tr>
+	<th>宛名</th>
+	<td><%= f.text_field :name,class: "col-sm-4" %></td>
+</tr>
+</table>
+</div>
+<div class="col-sm-3">
+<div class="btn">
+ <%= f.submit '編集する',class: "btn btn-primary 20px" %>
+</div>
  <% end %>
+</div>
+</div>
+</div>
+
+<style>
+.box {
+width: 100%;
+}
+
+.box th {
+border: 1px solid #ccc;
+padding: 10px;
+font-size: 18px;
+background-color: #dedede;
+width: 100px;
+}
+
+.box td {
+border: 1px solid #ccc;
+padding: 10px;
+font-size: 18px;
+width: 250px;
+
+}
+
+.btn{
+	margin-top: 55px;
+}
+</style>
+
