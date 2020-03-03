@@ -1,92 +1,36 @@
-<div class="container">
  <div class="row">
-    <div class="col-xs-3">
-      <table class="category">
-        <thead>
-          <tr>
-            <th>ジャンル検索</th>
-          </tr>
-        </thead>
-        <tbody>
-         <% @categories.each do |category| %>
-          <tr>
-            <th><%= link_to category.name, products_path(category_id: category.id)  %></th>
-          </tr>
-          <% end %>
-        </tbody>
-      </table>
-    </div>
-     <div class="col-xs-9">
-      <table class="product" >
-        <thead>
-          <tr>
-           <% if @category.blank? %>
-        	  <th>商品一覧</th>
-           <% else %>
-            <th><%= @category.name %>一覧</th>
-           <% end %>
-          </tr>
-        </thead>
-         <tbody>
-            <% @products.each do |product| %>
-              <tr>
-               <td class="img"><%= attachment_image_tag product, :product_image, size:"200x150", format: 'jpeg' %></td>
-               <td class="name"><%= link_to product.name, product_path(product.id) %></td>
-               <td class="price">￥<%= (product.price * (1 + $tax_rate)).round %></td>
-              </tr>
-            <% end %>
-          </tbody>
-        </table>
-      </div>
-    </div>
-  </div>
-
+  <%= render('category_form', categories: @categories) %>
+  <div class="col-xs-9">
+    <h3>
+      <% if @category.blank? %>
+        商品一覧
+      <% else %>
+        <%= @category.name %>一覧
+      <% end %>
+    </h3>
+    <div class="row">
+      <% @products.each do |product| %>
+        <div class="col-xs-4 product-container">
+          <ul class="product-list">
+            <li><%= attachment_image_tag(product, :product_image, size:"200x150", format: 'jpeg') %></li>
+            <li><%= link_to(product.name, product_path(product.id)) %></li>
+            <li><%= "¥" + (product.price * (1 + $tax_rate)).round.to_s %></li>
+          </ul>
+        </div>
+      <% end %>
+  <div>
   <div class="row">
     <div class="col-md-4 col-md-offset-6">
       <%= paginate @products %>
     </div>
   </div>
-
 </div>
+
 <style>
- 
-  .category{
-    display: block;
-    border: 1px solid #000;
-    width: 200px;
-    height: 400px;
-    min-height: 300px;
+  .product-list {
+    list-style: none;
   }
-  .category thead{
-    display: flex;
-    justify-content: center;
-    font-weight: bold;
-    text-align: center;
-    border-bottom: 1px solid #000;
+  .product-list li {
+    margin-top: 15px;
   }
-
-  .product{
-    margin-left: 10px;
-  }
-  .product thead{
-    font-size: 30px;
-  }
-
-  .product tbody{
-    display: flex;
-    flex-wrap: wrap;
-  }
-  .product tbody tr{
-    padding-top: 15px;
-    margin-right: 10px;
-    display: flex;
-    flex-direction: column;
-    min-width: 250px;
-  }
-  .name,
-  .price{
-    font-weight: bold;
-    padding-top: 5px;
-  }
-
 </style>
