@@ -1,20 +1,75 @@
-<h2>会員の方はこちらからログイン</h2>
-
-<%= form_for(resource, as: resource_name, url: session_path(resource_name)) do |f| %>
-  <div class="field">
-    <%= f.label :email, "メールアドレス" %><br />
-    <%= f.email_field :email, autofocus: true, autocomplete: "email" %>
+<div class="container">
+  <div class="row">
+    <div class="content col-md-3 col-md-offset-2"><p>会員の方はこちらからログイン</p></div>
   </div>
+  <div class="form-horizontal" role="form">
+    <%= form_for(resource, as: resource_name, url: session_path(resource_name)) do |f| %>
 
-  <div class="field">
-    <%= f.label :password, "パスワード" %><br />
-    <%= f.password_field :password, autocomplete: "current-password" %>
+      <div class="row field">
+        <div class="form-group">
+          <div class="col-md-2 col-md-offset-3 form">
+            <%= f.label :email, "メールアドレス" %><br />
+          </div>
+          <div class="col-md-6">
+            <%= f.email_field :email, autofocus: true, autocomplete: "email" %>
+          </div>
+        </div>
+      </div>
+
+      <div class="row field">
+        <div class="form-group">
+          <div class="col-md-2 col-md-offset-3 form">
+            <%= f.label :password, "パスワード" %><br />
+          </div>
+          <div class="col-md-6">
+            <%= f.password_field :password, autocomplete: "current-password" %>
+          </div>
+        </div>
+      </div>
+
+
+      <div class="row actions">
+        <div class="form-group" >
+          <div class="col-md-5 col-md-offset-5">
+            <%= f.submit "ログイン", class: "btn btn-primary" %>
+          </div>
+        </div>
+      </div>
+    <% end %>
+
+  <div class="row">
+    <div class="content col-md-3 col-md-offset-2"><p>登録がお済みでない方</p></div>
   </div>
-
-  <div class="actions">
-    <%= f.submit "ログイン" %>
+    <div class="sign_up"><%= link_to("こちら", new_customer_registration_path) %>  から新規登録を行なって下さい。</div>
   </div>
-<% end %>
+</div>
 
-<h2>登録がお済みでない方</h2>
-<%= link_to("こちら", new_customer_registration_path) %><p>   から新規登録を行なって下さい。</p>
+<style>
+.content{
+  text-align: center;
+  padding-top: 10px;
+  font-family: arial black;
+  background-color: #cccccc;
+}
+.row .btn-primary{
+  width: 100px;
+  height: 30px;
+}
+input[type="email"] {
+  width: 300px;
+  height: 30px;
+  border-radius: 10px;
+}
+
+input[type="password"] {
+  width: 300px;
+  height: 30px;
+  border-radius: 10px;
+}
+.form {
+  padding-top: 10px;
+}
+.sign_up{
+  margin-left: 230px;
+  padding-top: 20px;
+}
