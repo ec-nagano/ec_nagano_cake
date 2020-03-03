@@ -8,21 +8,21 @@
 
 <div class="admin_category_edit">
 
-    <%= form_for(@category, :url => {:action => :update}) do |f| %>
+    <%= form_with(model: @category, url: admin_category_path(@category.id), method: :PATCH) do |f| %>
 
       <span class="category_edit">ジャンル</span>
       <span class="category_edit"><%= f.text_field :name %></span>
 
       <span class="category_edit">
         <!-- ラジオボタン -->
-        <label for="category_edit_is_active_true"><%=f.radio_button :is_active, true %>有効</label>
-        <label for="category_edit_is_active_false"><%=f.radio_button :is_active, false %>無効</label>
+        <label><%=f.radio_button(:is_active, true) %>有効</label>
+        <label><%=f.radio_button(:is_active, false) %>無効</label>
 
       </span>
 
-      <span class="category_edit"><%= f.submit("変更を保存する", class: "btn btn-primary") %></span>
-
-</div>
+      <span class="category_edit">
+        <%= f.submit("変更を保存する", class: "btn btn-primary") %>
+      </span>
 
     <% end %>
 </div>

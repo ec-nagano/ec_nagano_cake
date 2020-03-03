@@ -1,6 +1,5 @@
 class OrdersController < ApplicationController
 
-    # 全てのアクションについて、ログイン済みかを判定する
     before_action :authenticate_customer!
     before_action :ensure_correct_customer, only: [:show]
 
@@ -10,11 +9,12 @@ class OrdersController < ApplicationController
 
     def show
         @order = Order.find(params[:id])
-        @ordered_items = OrderedItem.where(order_id: @order.id)
+        @ordered_items = @order.ordered_items
     end
 
     def new
         cart_items = CartItem.where(customer_id: current_customer.id)
+        # カートに商品がない場合redirectする
         if cart_items.blank?
             flash[:notice] = "カートに商品がありません"
             redirect_to(products_path)
@@ -53,20 +53,21 @@ class OrdersController < ApplicationController
                 name: params[:new_recipient]
             )
             if address.invalid?
+                address.save
+                flash[:notice].now = "住所を登録しました。"
+            else
                 @addresses = ShippingAddress.where(customer_id: current_customer.id)
-                flash[:notice] = "新しい住所に未入力の箇所があります。"
+                flash[:notice] = "新しい住所に不備があります。"
                 render(:new)
             end
-            address.save
-            flash[:notice] = "住所を登録しました。"
             @postcode = address.postcode
             @address = address.address
             @recipient = address.name
         end
         # 請求額を計算する処理
         @billing_amount = 0
-        @cart_items.each do |e|
-            @billing_amount += (e.product.price * (1 + $tax_rate)).round * e.amount
+        @cart_items.each do |cart_item|
+            @billing_amount += (cart_item.product.price * (1 + $tax_rate)).round * cart_item.amount
         end
         @delivery_fee = $delivery_fee
         @payment = params[:payment].to_i
@@ -80,16 +81,16 @@ class OrdersController < ApplicationController
         order.save
         # ordered_itemsテーブルのレコードを作成する処理
         cart_items = CartItem.where(customer_id: current_customer.id)
-        cart_items.each do |e|
+        cart_items.each do |cart_item|
             ordered_item = OrderedItem.new(
                 order_id: order.id,
-                product_id: e.product.id,
-                price: (e.product.price * (1 * $tax_rate)).round,
-                amount: e.amount
+                product_id: cart_item.product.id,
+                price: (cart_item.product.price * (1 * $tax_rate)).round,
+                amount: cart_item.amount
             )
             ordered_item.save
             # ordered_itemsテーブルにレコードの作成処理が終了したcart_itemsレコードを削除する
-            e.destroy
+            cart_item.destroy
         end
         redirect_to(orders_thanks_path)
     end
@@ -103,11 +104,13 @@ class OrdersController < ApplicationController
         params.require(:order).permit(:postcode, :address, :recipient, :delivery_fee, :billing_amount, :payment)
     end
 
+    # 他のcustomer がアクセスできないようにする
     def ensure_correct_customer
-        @order = Order.find(params[:id])
-        if @order.customer_id != current_customer.id
+        order = Order.find(params[:id])
+        if order.customer != current_customer
             flash[:notice] = "権限がありません"
             redirect_to("/customers/#{current_customer.id}")
         end
     end
+    
 end

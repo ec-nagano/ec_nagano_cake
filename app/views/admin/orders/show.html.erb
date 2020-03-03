@@ -1,11 +1,11 @@
 <div class="container">
-	<h2>注文詳細画面</h1>
+	<h3>注文詳細画面</h3>
 	<div class="row">
 		<div class="col-md-2">
 			<p>購入者</p>
 		</div>
 		<div class="col-md-10">
-			<%= link_to @customer.first_name + @customer.last_name, admin_customer_path(@customer.id) %>
+			<%= link_to(@customer.first_name + @customer.last_name, admin_customer_path(@customer.id)) %>
 		</div>
 	</div>
 
@@ -14,7 +14,7 @@
 			<p>配送先</p>
 		</div>
 		<div class="col-md-10">
-			<%= @order.address %><%= @order.recipient %>
+			<%= @order.address + ' ' + @order.recipient %>
 		</div>
 	</div>
 
@@ -31,12 +31,12 @@
 		<div class="col-md-2">
 			<p>注文ステータス</p>
 		</div>
-		<%= form_with model: @order, url: admin_order_path, local: true do |f| %>
+		<%= form_with(model: @order, url: admin_order_path, local: true) do |f| %>
 			<div class="col-md-2">
-				<%= f.select :status, [["入金待ち", 0], ["入金確認", 1], ["製作中", 2], ["発送準備中", 3], ["発送済み", 4]], { selected: @order.status_before_type_cast}, { class: "form-control" } %>
+				<%= f.select(:status, [["入金待ち", 0], ["入金確認", 1], ["製作中", 2], ["発送準備中", 3], ["発送済み", 4]], { selected: @order.status_before_type_cast}, { class: "form-control" }) %>
 			</div>
 			<div class="col-md-2">
-				<%= f.submit "更新", class: "btn btn-primary btn-sm" %>
+				<%= f.submit("更新", class: "btn btn-primary btn-sm") %>
 			</div>
 		<% end %>
 	</div>
@@ -52,17 +52,16 @@
 					<th>製作ステータス</th>
 				</tr>
 
-				<% sum = 0 %>
+				<% sub_total = 0 %>
 				<% @ordered_items.each do |item| %>
 					<tr>
 						<td><%= item.product.name %></td>
-						<!-- 税込計算は後日 -->
 						<td><%= (item.price * (1 + $tax_rate)).round %></td>
 						<td><%= item.amount %></td>
 						<td><%= (item.price * (1 + $tax_rate)).round * item.amount %></td>
-						<% sum += (item.price * (1 + $tax_rate)).round * item.amount %>
+						<% sub_total += (item.price * (1 + $tax_rate)).round * item.amount %>
 						<td>
-							<%= form_with model: item, url: admin_order_path, local: true do |f| %>
+							<%= form_with(model: item, url: admin_order_path, local: true) do |f| %>
 								<div class="col-md-6">
 									<%= f.select :status, [["着手不可", 0], ["製作待ち", 1], ["製作中", 2], ["製作完了", 3]], { selected: item.status_before_type_cast }, { class: "form-control select" } %>
 								</div>
@@ -81,30 +80,30 @@
 
 		<div class="col-md-3 col-md-offset-1" id="price">
 			<div class="row">
-			<div class="col-md-6">
-				<p>商品合計</p>
-			</div>
-			<div class="col-md-6">
-				<%= sum %>円
-			</div>
-			</div>
-
-			<div class="row">
-			<div class="col-md-6">
-				<p>送料</p>
-			</div>
-			<div class="col-md-6">
-				<%= @order.delivery_fee %>円
-			</div>
+				<div class="col-md-6">
+					<p>商品合計</p>
+				</div>
+				<div class="col-md-6">
+					<%= sub_total %>円
+				</div>
 			</div>
 
 			<div class="row">
-			<div class="col-md-6">
-				<p>請求金額合計</p>
+				<div class="col-md-6">
+					<p>送料</p>
+				</div>
+				<div class="col-md-6">
+					<%= @order.delivery_fee %>円
+				</div>
 			</div>
-			<div class="col-md-6">
-				<span><%= sum + @order.delivery_fee %>円</span>
-			</div>
+
+			<div class="row">
+				<div class="col-md-6">
+					<p>請求金額合計</p>
+				</div>
+				<div class="col-md-6">
+					<span><%= sub_total + @order.delivery_fee %>円</span>
+				</div>
 			</div>
 		</div>
 	</div>
@@ -125,3 +124,4 @@ p {
 span {
 	font-family: arial black;
 }
+</style>

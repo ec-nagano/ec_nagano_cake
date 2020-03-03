@@ -2,9 +2,9 @@ class Admin::CustomersController < ApplicationController
 
     before_action :authenticate_admin!
 
-
     def index
-        @customers = Customer.order(created_at: :asc).page(params[:page])
+        # 登録日の新しい順番で表示する
+        @customers = Customer.order(created_at: :ASC).page(params[:page])
 	end
 
 	def show
@@ -18,9 +18,11 @@ class Admin::CustomersController < ApplicationController
     def update
     	@customer = Customer.find(params[:id])
         if @customer.update(customer_params)
-           redirect_to admin_customer_path(@customer)
+            flash[:notice] = "顧客情報を編集しました"
+           redirect_to(admin_customer_path(@customer))
         else
-           render :edit
+            @customer =  Customer.find(params[:id])
+            render(:edit)
         end
     end
 
@@ -28,6 +30,5 @@ class Admin::CustomersController < ApplicationController
     def customer_params
         params.require(:customer).permit(:first_name, :last_name, :first_name_kana, :last_name_kana, :postcode, :address, :phone_number, :email, :is_active)
     end
-
 
 end

@@ -7,18 +7,18 @@
 <div class="row">
 	<div class="col-md-2">
 	</div>
-	<% @products.each do |p| %>
-		<%= link_to product_path(p.id) do %>
+	<% @products.each do |product| %>
+		<%= link_to product_path(product.id) do %>
 			<div class="col-md-2 image">
-				<%= attachment_image_tag(p, :product_image, :fill, 150, 150) %><br>
-				<%= p.name %>
+				<%= attachment_image_tag(product, :product_image, :fill, 150, 150) %><br>
+				<%= product.name %>
 			</div>
 		<% end %>
 	<% end %>
 </div>
 
 <div class="product_btn">
-	<%= link_to "商品一覧へ（ジャンル検索）", products_path, class: "btn btn-primary" %>
+	<%= link_to("商品一覧へ（ジャンル検索）", products_path, class: "btn btn-primary") %>
 <div>
 
 <style>
@@ -39,3 +39,4 @@ p{
 .image{
 	text-align: center;
 }
+</style>
