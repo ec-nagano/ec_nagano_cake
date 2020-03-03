@@ -35,7 +35,7 @@
                         <td>
                             <div class="amount">
                                 <%= form_with(model: cart_item, url: cart_item_path(cart_item.id), method: :patch) do |f| %>
-                                    <%= f.number_field :amount %>
+                                    <%= f.number_field :amount, min: 1, defoult: 1 %>
                                     <%= f.hidden_field :product_id, value: cart_item.id %>
                                     <%= f.submit '変更', class: "btn btn-primary btn-sm" %>
                                 <% end %>
