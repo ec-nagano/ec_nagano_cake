@@ -1,11 +1,41 @@
-<h1>本当に退会しますか？</h1>
+<div class="container">
+  <div class="row">
+  	<div class="text">
+  	<h2>本当に退会しますか？</h2>
 
-<h2>退会すると、会員登録情報や
-これまでの購入履歴が閲覧できなくなります。
-退会する場合は、「退会する」をクリックしてください。</h2>
-<div>
-	<%= link_to '退会しない',"/customer/#{@customer.id}" %>
+<h3>退会すると、会員登録情報や<br>
+これまでの購入履歴が閲覧できなくなります。<br>
+退会する場合は、「退会する」をクリックしてください。</h3>
 </div>
-<div>
-	<%= link_to '退会する', customer_registration_path(unsubscribing: true), {method: :PATCH} %>
 </div>
+<div class="row">
+	<div class="col-xs-6">
+<div class="back">
+	<%= link_to '退会しない',"/customer/#{@customer.id}", class: "btn btn-primary 30px" %>
+</div>
+</div>
+	<div class="col-xs-6">
+<div class="enter">
+	<%= link_to '退会する', customer_registration_path(unsubscribing: true), method: :PATCH, class: "btn btn-danger 30px" %>
+</div>
+</div>
+</div>
+</div>
+
+
+<style>
+.text{
+	margin-top: 100px;
+	text-align: center;
+}
+.text h2{
+	margin-bottom: 100px;
+}
+.back{
+	margin-top: 20px;
+	margin-left: 450px;
+}
+.enter{
+	margin-top: 20px;
+}
+</style>
