@@ -1,79 +1,72 @@
-<div class="container">
-  <div class="row">
+<div class="row">
+
 <h2>購入情報入力</h2>
+    <%# confirmコントローラでordersモデルに保存する値を判定するため、引数にモデルを定義しない %>
+    <%= form_with(url: orders_cofirm_path, local: true, method: :post) do |f| %>
+        <div class="title">
+            <strong>支払方法</strong>
+        </div>
+        <div class="content">
+            <%= f.radio_button :payment, 0 %>クレジットカード
+        </div>
+        <div class="content">
+            <%= f.radio_button :payment, 1 %>銀行振込
+        </div>
+        <%# radio_button_tagでaddress_typeの値を送信し、コントローラーでorderに保存するpostcode, address, recipientを判断する %>
+        <div class="title">
+            <strong>お届け先</strong>
+        </div>
+        <div class="content">
+            <%= f.radio_button(:address_type, 0) %>ご自身の住所
+        </div>
+        <div class="content">
+            <%= "〒" + current_customer.postcode %>
+        </div>
+        <div class="content">
+            <%= " " + current_customer.address %>
+        </div>
+        <div class="content">
+            <%= " " + current_customer.first_name + " " + current_customer.last_name %>
+        </div>
+        <%# current_userに紐付くshipping_addressを@addressに代入し、collection_selectで表示する %>
+        <div class="content">
+            <%= f.radio_button(:address_type, 1) %>登録済住所から選択
+        </div>
+        <!-- selectのsizeの指定をするとinclude_blankの”選択してください”が下に表示されてしまいます。 -->
+        <div class="content">
+            <%= f.collection_select(:existing_address, @addresses, :id, :postcode ,include_blank: '選択してください') %>
+        </div>
+        <div class="content">
+             <%= f.radio_button(:address_type, 2) %>新しいお届け先
+        </div>
 
-<%# confirmコントローラでordersモデルに保存する値を判定するため、引数にモデルを定義しない %>
-<%= form_with(url: orders_cofirm_path, local: true, method: :post) do |f| %>
-    <div class="title">支払方法</div>
-    <div class="btn"><%= f.radio_button :payment, 0 %>クレジットカード</div>
-    <br>
-    <div class="btn"><%= f.radio_button :payment, 1 %>銀行振込</div>
+        <table>
+            <tr>
+                <th>郵便番号</th>
+                <td><%= f.text_field(:new_postcode) %>ハイフンなし</td>
+            </tr>
+            <tr>
+                <th>住所</th>
+                <td><%= f.text_field(:new_address) %></td>
+            </tr>
+            <tr>
+                <th>宛名</th>
+                <td><%= f.text_field(:new_recipient) %></td>
+            </tr>
+        </table>
+        <div class="ver">
+            <%= f.submit("確認画面へ進む", class: "btn btn-primary") %>
+        </div>
+    <% end %>
+</div>
 
-    <%# radio_button_tagでaddress_typeの値を送信し、コントローラーでorderに保存するpostcode, address, recipientを判断する %>
-    <div class="title">お届け先</div>
-    <div class="btn"><%= f.radio_button(:address_type, 0) %>ご自身の住所
-    <br>
-    <%= "〒" + current_customer.postcode %>
-    <br>
-    <%= current_customer.address %>
-    <%= current_customer.first_name + " " + current_customer.last_name %></div>
-    <br>
-    <%# current_userに紐付くshipping_addressを@addressに代入し、collection_selectで表示する %>
-    <div class="btn"><%= f.radio_button(:address_type, 1) %>登録済住所から選択</div>
-    <br>
-    <!-- selectのsizeの指定をするとinclude_blankの”選択してください”が下に表示されてしまいます。 -->
-    <%= f.collection_select(:existing_address, @addresses, :id, :postcode ,include_blank: '選択してください',class: "500px") %>
-    </div>
-    <br>
-    <div class="btn"><%= f.radio_button(:address_type, 2) %>新しいお届け先</div>
-    <table class="new">
-        <tr>
-            <th>郵便番号</th>
-            <td><%= f.text_field(:new_postcode,class: "col-xs-2") %>  ハイフンなし</td>
-        </tr>
-        <tr>
-            <th>住所</th>
-            <td><%= f.text_field(:new_address,class: "col-xs-8") %></td>
-        </tr>
-        <tr>
-            <th>宛名</th>
-            <td><%= f.text_field(:new_recipient,class: "col-xs-3") %></td>
-        </tr>
-    </table>
-    <div class="ver">
-    <%= f.submit("確認画面へ進む", class: "btn btn-primary") %>
-</div>
-<% end %>
-</div>
-</div>
 
 <style>
-.title{
-    font-size: 25px;
-    font-weight: bold;
-}
-.btn{
-    margin-left: 50px;
-    font-size: 18px;
-}
-
-.new {
-width: 100%;
-}
-
-.new th {
-padding: 5px;
-font-size: 18px;
-width: 50px;
-}
-
-.new td {
-padding: 5px;
-font-size: 18px;
-width: 250px;
-}
-
-.ver {
-    padding-left: 400px;
-}
+    h2 {margin: 0 0 20px 0;}
+    .title {merigin: 0  0 0 10px; font-size: 18px;}
+    .content {margin: 10px 0 10px 50px; font-size: 16px;}
+    select {width:500px;}
+    table {margin: 10px 0 0 55px;}
+    input[type="text"] {width: 440px; margin:0 15px 0 15px;}
+    .btn-primary {margin: 40px;}
 </style>

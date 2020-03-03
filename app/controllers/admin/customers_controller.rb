@@ -3,8 +3,7 @@ class Admin::CustomersController < ApplicationController
     before_action :authenticate_admin!
 
     def index
-        # 登録日の新しい順番で表示する
-        @customers = Customer.order(created_at: :ASC).page(params[:page])
+        @customers = Customer.page(params[:page])
 	end
 
 	def show
