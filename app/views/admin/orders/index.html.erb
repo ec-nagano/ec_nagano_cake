@@ -1,7 +1,7 @@
-<h1>注文一覧画面</h1>
+<h2>注文一覧画面</h1>
 
-<table>
-	<tr>
+<table class="table">
+	<tr class="active">
 		<th>購入日時</th>
 		<th>購入者</th>
 		<th>注文個数</th>
@@ -18,7 +18,7 @@
 			<% sum += item.amount %>
 		<% end %>
 	<tr>
-		<td><%= order.created_at.strftime("%Y-%m-%d %H:%M") %></td>
+		<td><%= link_to order.created_at.strftime("%Y-%m-%d %H:%M"), admin_order_path(order.id) %></td>
 		<td><%= customer.first_name + customer.last_name %></td>
 		<td><%= sum %></td>
 		<td><%= order.status %></td>
@@ -26,3 +26,8 @@
 	<% end %>
 	<%= paginate @orders %>
 </table>
+
+<style>
+table{
+	width: 50%
+}
