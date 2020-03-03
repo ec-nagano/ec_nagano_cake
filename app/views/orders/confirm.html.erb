@@ -1,5 +1,8 @@
+<div class="container">
+  <div class="row">
 <h2>注文情報確認</h2>
-<table>
+<div class="col-sm-9">
+<table class="detail">
     <thead>
         <tr>
             <th>商品</th>
@@ -13,7 +16,7 @@
         <% @cart_items.each do |cart_item| %>
             <tr>
                 <td>
-                    </textarea><%= attachment_image_tag(cart_item.product, :product_image, :fill, 30, 30) %>
+                    <%= attachment_image_tag(cart_item.product, :product_image, :fill, 30, 30) %>
                     <%= cart_item.product.name %>
                 </td>
                 <td>
@@ -28,8 +31,10 @@
             </tr>
         <% end %>
     </tbody>
-</table> 
-<table>
+</table>
+</div>
+<div class="col-xs-3">
+<table class="price">
     <tr>
         <th>送料</th>
         <td><%= @delivery_fee %></td>
@@ -43,15 +48,27 @@
         <td><%= @delivery_fee + @billing_amount %></td>
     </tr>
 </table>
-
-<h2>支払い方法</h2>
+</div>
+</div>
+<div class="row">
+<ul class="confirm">
+<li><h3><strong>支払い方法</strong></h3></li>
     <% if(@payment == 0) %>
-        <%= "クレジットカード" %>
+        <li><h3><%= "クレジットカード" %></h3></li>
     <% else %>
-        <%= "銀行振込" %>
+       <li><h3> <%= "銀行振込" %></h3></li>
     <% end %>
-<h2>お届け先</h2><%= "〒" + @postcode + @address + @recipient %>
-
+</ul>
+<ul class="confirm">
+<li><h3><strong>お届け先</strong></h3></li>
+    <li><h3><%= "〒" + @postcode %></h3></li>
+    <li><h3><%= @address %></h3></li>
+    <li><h3><%= @recipient %></h3></li>
+</ul>
+</div>
+<div class="row">
+    <div class="col-xs-6">
+        <div class="enter">
 <%# hidden_fieldを用いて、createアクションにパラメータを送信する %>
 <%= form_with(model: @order, url: orders_path, local: true) do |f| %>
     <%= f.hidden_field :recipient, value: @recipient %>
@@ -60,7 +77,78 @@
     <%= f.hidden_field :delivery_fee, value: @delivery_fee %>
     <%= f.hidden_field :billing_amount, value: @billing_amount %>
     <%= f.hidden_field :payment, value: @payment %>
-    <%= f.submit("購入を確定する", class: "btn btn-default") %>
+    <%= f.submit("購入を確定する", class: "btn btn-primary 30px") %>
 <% end %> 
+</div>
+</div>
+<div class="col-xs-6">
+    <div class="back">
+<%= link_to('戻る',cart_items_path, class: "btn btn-danger 30px") %>
+</div>
+</div>
+</div>
+</div>
 
-<%= link_to('戻る',cart_items_path, class: "btn btn-danger") %>
+
+
+<style>
+.detail {
+width: 80%;
+}
+
+.detail th {
+border: 1px solid #ccc;
+padding: 10px;
+font-size: 18px;
+background-color: #dedede;
+width: 100px;
+}
+
+.detail td {
+border: 1px solid #ccc;
+padding: 10px;
+font-size: 18px;
+width: 250px;
+}
+.price{
+    width: 100%;
+}
+.price th {
+border: 1px solid #ccc;
+padding: 10px;
+font-size: 18px;
+background-color: #dedede;
+width: 100px;
+}
+
+.price td {
+border: 1px solid #ccc;
+padding: 10px;
+font-size: 18px;
+width: 100px;
+}
+ul {
+    list-style-type: none;
+    padding: 0;
+    margin:0;
+}
+
+.confirm li{
+    display: inline-block;
+    margin-top: 20px;
+}
+.confirm li h3{
+    padding: 0;
+    text-indent: 0;
+    margin-right: 10px;
+}
+
+.enter {
+    margin-top: 50px;
+    margin-left: 500px;
+}
+.back {
+    margin-top: 50px;
+    margin-left: 500px;
+}
+</style>
