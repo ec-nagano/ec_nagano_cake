@@ -1,82 +1,32 @@
-<div class="container">
-	<div class="row">
-		<div class="col-xs-3">
-      <table class="category">
-		<thead>
-          <tr>
-            <th>ジャンル検索</th>
-          </tr>
-        </thead>
-        <tbody>
-         <% @categories.each do |category| %>
-          <tr>
-            <th><%= link_to category.name, products_path(category_id: category.id)  %></th>
-          </tr>
-          <% end %>
-        </tbody>
-      </table>
-  </div>
+<div class="row">
+  <%= render('category_form', categories: @categories) %>
   <div class="col-xs-4">
-  <div class="img"><%= attachment_image_tag @product, :product_image, size:"350x300", format: 'jpeg' %></div>
-</div>
+    <%= attachment_image_tag(@product, :product_image, size:  "350x300", format: 'jpeg') %>
+  </div>
   <div class="col-xs-5">
-  	<div class="title">
-  <%= @product.name %>
-</div>
-   <pre class="text"><%= @product.content %></pre>
-  <ul class="title">￥<%=(@product.price * (1 + $tax_rate)).round %><li>(税込)</li></div>
-<!-- cart_itemのコントローラーのcreate actionを記述しました。 -->
-  <%= form_for(@cart_item, url: cart_items_path) do |f| %>
-<ul class="btn">
-    <li><%= f.number_field :amount, min: 1 %></li>
-        <%= f.hidden_field :product_id, value: @product.id %>
-    <li><%= f.submit 'カートに入れる',class: "btn btn-primary 20px" %></li>
+    <div class="panel panel-warning">
+      <div class="panel-heading">
+        <div class="panel-title">
+          <%= @product.name %>
+        </div>
+      </div>
+      <div class="panel-body">
+        <h4>商品説明</h4>
+        <p><%= @product.content %></p>
+        <h4>価格</h4>
+        <p><span class="price">￥<%= (@product.price * (1 + $tax_rate)).round.to_s %></span>（税込）</p>
+      </div>
+    </div>
+    <%= form_with(model: @cart_item, url: cart_items_path) do |f| %>
+      <%= f.number_field(:amount, min: 1) %>
+      <%= f.hidden_field(:product_id, value: @product.id) %>
+      <%= f.submit('カートに入れる',class: "btn btn-primary") %>
     <% end %>
-  </ul>
+  </div>
 </div>
-</div>
-</div>
-
-
-
 <style>
-  .category{
-    display: block;
-    border: 1px solid #000;
-    width: 200px;
-    height: 400px;
-    min-height: 300px;
-  }
-  .category thead{
-    display: flex;
-    justify-content: center;
+  .price {
+    font-size: 20px;
     font-weight: bold;
-    text-align: center;
-    border-bottom: 1px solid #000;
   }
-  .title{
-  	width: 200px;
-  	margin-top: 10px;
-  	margin-bottom: 10px;
-  	font-weight: bold;
-  	font-size: 25px;
-  }
-  .text {
-  	width: 400px;
-  	white-space: pre-line;
-  	font-size: 20px;
-  	border: none;
-    background-color: white;
-
-  }
-  ul {
-    list-style-type: none;
-    padding: 0;
-    margin:0;
-}
-
- li{
-  display: inline-block;
-  font-size: 14px;
-}
 </style>
