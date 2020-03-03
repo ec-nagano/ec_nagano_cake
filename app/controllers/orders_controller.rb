@@ -44,7 +44,7 @@ class OrdersController < ApplicationController
             @postcode = address.postcode
             @address = address.address
             @recipient = address.name
-        # "新しい住所"の場合    
+        # "新しい住所"の場合
         when 2
             address = ShippingAddress.new(
                 customer_id: current_customer.id,
@@ -52,6 +52,11 @@ class OrdersController < ApplicationController
                 address: params[:new_address],
                 name: params[:new_recipient]
             )
+            if address.invalid?
+                @addresses = ShippingAddress.where(customer_id: current_customer.id)
+                flash[:notice] = "新しい住所に未入力の箇所があります。"
+                render(:new)
+            end
             address.save
             flash[:notice] = "住所を登録しました。"
             @postcode = address.postcode

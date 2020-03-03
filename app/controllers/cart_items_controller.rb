@@ -11,6 +11,9 @@ class CartItemsController < ApplicationController
     def create
         cart_item = CartItem.new(cart_item_params)
         cart_item.customer_id = current_customer.id
+        if cart_item.invalid?
+            redirect_to root_path
+        end
         if cart_item.save
             flash[:notice] = "カートに追加しました"
             redirect_to(cart_items_path)
@@ -26,7 +29,7 @@ class CartItemsController < ApplicationController
 
     def update
         cart_item = CartItem.find(params[:id])
-        if cart_item.update(cart_item_params)
+        if cart_item.update(amount: params[:cart_item][:amount])
             flash[:notice] = "#{cart_item.product.name}の数量を変更しました"
         end
         redirect_to(cart_items_path)
