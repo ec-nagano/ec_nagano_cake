@@ -1,12 +1,41 @@
-<img src="/assets/画像を用意する" alt="ケーキの画像", class="img_top_cake">
+<img src="/assets/PAK57_ichigonocake_TP_V.jpg" alt="ケーキの画像">
 
-<h1>おすすめ</h1>
+<div class="text">
+	<p>おすすめ</p>
+</div>
 
-<% @products.each do |p| %>
-	<%= link_to product_path(p.id) do %>
-		<%= attachment_image_tag(p, :product_image, :fill, 50, 50) %>
-		<%= p.name %>
+<div class="row">
+	<div class="col-md-2">
+	</div>
+	<% @products.each do |p| %>
+		<%= link_to product_path(p.id) do %>
+			<div class="col-md-2 image">
+				<%= attachment_image_tag(p, :product_image, :fill, 150, 150) %><br>
+				<%= p.name %>
+			</div>
+		<% end %>
 	<% end %>
-<% end %>
+</div>
 
-<%= link_to "商品一覧へ（ジャンル検索）", products_path %>
+<div class="product_btn">
+	<%= link_to "商品一覧へ（ジャンル検索）", products_path, class: "btn btn-primary" %>
+<div>
+
+<style>
+img{
+	max-width: 100%;
+}
+.text{
+	text-align: center;
+	margin: 30px 0
+}
+p{
+	font-size: 20px
+}
+.product_btn{
+	text-align: center;
+	margin-top: 30px
+}
+.image{
+	text-align: center;
+}

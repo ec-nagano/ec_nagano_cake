@@ -4,6 +4,7 @@ class HomesController < ApplicationController
 	def top
 		#ランダムにproductのレコードを取得
 		@products = Product.order("random()").limit(4)
+		render :layout => "top"
 	end
 
 	def about

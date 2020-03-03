@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>EcNagano</title>
+    <%= csrf_meta_tags %>
+    <%= csp_meta_tag %>
+
+    <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
+    <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
+</head>
+
+    <body>
+    <header>
+    <div class="navbar-header">
+        <a class="navbar-logo" href="/">
+            <%= image_tag('logo.jpg') %>
+        </a>
+    </div>
+        <div id="slidemenu">
+            <ul class="nav navbar-nav navbar-right" data-hover="dropdown" data-animations="zoomIn fadeIn fadeInUp fadeIn">
+                <% if current_customer %>
+                    <li>
+                        <%= link_to("#{current_customer.first_name}様", "/customer/#{current_customer.id}") %>
+                    </li>
+                    <li>
+                        <%= link_to("ログアウト", destroy_customer_session_path, method: :delete) %>
+                    </li>
+                    <li>
+                        <%= link_to("カートを見る", cart_items_path) %>
+                    </li>
+                <% else %>
+                    <li>
+                        <%= link_to("ながのCAKEについて", about_path) %>
+                    </li>
+                    <li>
+                        <%= link_to("ログイン", new_customer_session_path) %>
+                    </li>
+                    <li>
+                        <%= link_to("会員登録はこちら", new_customer_registration_path) %>
+                    </li>
+                <% end %>
+            </ul>
+        </div>
+    </header>
+
+    <%= yield %>
+    </body>
+</html>
