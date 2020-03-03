@@ -1,21 +1,82 @@
-<h1>ジャンル検索</h1>
-<% @categories.each do |category| %>
-<li><%= link_to category.name, products_path(category_id: category.id)  %></li>
-<% end %>
-
-
-<tbody>
-  <td><%= attachment_image_tag @product, :product_image, size:"200x200", format: 'jpeg' %>
-  <%= @product.name %></td>
-  <td><%= @product.content %></td>
-  <td><%= (@product.price * (1 + $tax_rate)).round %><li>(税込価格)></li></td>
+<div class="container">
+	<div class="row">
+		<div class="col-xs-3">
+      <table class="category">
+		<thead>
+          <tr>
+            <th>ジャンル検索</th>
+          </tr>
+        </thead>
+        <tbody>
+         <% @categories.each do |category| %>
+          <tr>
+            <th><%= link_to category.name, products_path(category_id: category.id)  %></th>
+          </tr>
+          <% end %>
+        </tbody>
+      </table>
+  </div>
+  <div class="col-xs-4">
+  <div class="img"><%= attachment_image_tag @product, :product_image, size:"350x300", format: 'jpeg' %></div>
+</div>
+  <div class="col-xs-5">
+  	<div class="title">
+  <%= @product.name %>
+</div>
+   <pre class="text"><%= @product.content %></pre>
+  <ul class="title">￥<%=(@product.price * (1 + $tax_rate)).round %><li>(税込)</li></div>
 <!-- cart_itemのコントローラーのcreate actionを記述しました。 -->
   <%= form_for(@cart_item, url: cart_items_path) do |f| %>
-
-    <td><%= f.number_field :amount %></td>
+<ul class="btn">
+    <li><%= f.number_field :amount %></li>
         <%= f.hidden_field :product_id, value: @product.id %>
-    <td><%= f.submit 'カートに入れる' %></td>
+    <li><%= f.submit 'カートに入れる',class: "btn btn-primary 20px" %></li>
     <% end %>
+  </ul>
+</div>
+</div>
+</div>
 
-</tbody>
 
+
+<style>
+  .category{
+    display: block;
+    border: 1px solid #000;
+    width: 200px;
+    height: 400px;
+    min-height: 300px;
+  }
+  .category thead{
+    display: flex;
+    justify-content: center;
+    font-weight: bold;
+    text-align: center;
+    border-bottom: 1px solid #000;
+  }
+  .title{
+  	width: 200px;
+  	margin-top: 10px;
+  	margin-bottom: 10px;
+  	font-weight: bold;
+  	font-size: 25px;
+  }
+  .text {
+  	width: 400px;
+  	white-space: pre-line;
+  	font-size: 20px;
+  	border: none;
+    background-color: white;
+
+  }
+  ul {
+    list-style-type: none;
+    padding: 0;
+    margin:0;
+}
+
+ li{
+  display: inline-block;
+  font-size: 14px;
+}
+</style>
