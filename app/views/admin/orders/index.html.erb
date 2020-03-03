@@ -24,6 +24,13 @@
 		<td><%= order.status %></td>
 	</tr>
 	<% end %>
+
+	<div class="row">
+    	<div class="col-md-4 col-md-offset-6">
+    		<%= paginate @orders %>
+    	</div>
+	</div>
+
 	<%= paginate @orders %>
 </table>
 
