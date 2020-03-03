@@ -15,4 +15,20 @@ class Customer < ApplicationRecord
   validates :address, presence: true
   validates :postcode, presence: true, length: { minimum: 7 }, numericality: { only_integer: true }
   validates :phone_number, presence: true, length: { minimum: 9 }, numericality: { only_integer: true }
+  validates :postcode, presence: true
+  validates :phone_number, presence: true
+
+  def update_without_current_password(params, *options)
+    params.delete(:current_password)
+
+    if params[:password].blank? && params[:password_confirmation].blank?
+      params.delete(:password)
+      params.delete(:password_confirmation)
+    end
+
+    result = update_attributes(params, *options)
+    clean_up_passwords
+    result
+  end
+
 end
