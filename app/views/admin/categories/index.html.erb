@@ -3,21 +3,21 @@
 <% if @category.errors.any? %>
 　　<div id="error_explanation">
       <h4>【 入力されていない項目があります。 】</h4>
-  　</div>
+    </div>
 <% end %>
 
 <div class="admin_category_new">
 
-  <%= form_for(@category, :url => {:action => :create}) do |f| %>
+  <%= form_with(model: @category, url: admin_categories_path, method: :POST) do |f| %>
 
-    <div class="category_new_field"><!-- このdivの中にフォームから追加ボタンまでを全て実装 -->
+    <div class="category_new_field">
       <span class="category_new">ジャンル</span>
       <span class="category_new"><%= f.text_field :name %></span>
 
       <span class="category_new">
         <!-- ラジオボタン -->
-        <label for="category_new_is_active_true"><%=f.radio_button :is_active, true %>有効</label>
-        <label for="category_new_is_active_false"><%=f.radio_button :is_active, false %>無効</label>
+        <label><%=f.radio_button(:is_active, true) %>有効</label>
+        <label><%=f.radio_button(:is_active, false) %>無効</label>
       </span>
 
       <%= f.submit("追加", class: "btn btn-primary") %>
@@ -35,10 +35,9 @@
       <th>状態</th>
       <th></th>
     </tr>
-    </thead>
+  </thead>
 
   <tbody>
-
     <% @categories.each do |category| %>
       <tr>
         <td>
@@ -50,10 +49,10 @@
           <% else %>
             無効
           <% end %>
-          </td>
-          <td>
-            <%= link_to("編集", edit_admin_category_path(category), class:'btn btn-primary') %>
-          </td>
+        </td>
+        <td>
+          <%= link_to("編集", edit_admin_category_path(category), class:'btn btn-primary') %>
+        </td>
       </tr>
     <% end %>
   </tbody>

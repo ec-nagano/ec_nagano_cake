@@ -1,12 +1,9 @@
 <h3>
-
    商品一覧画面
-   <label for="product_index_label">
-     <%= link_to "" ,new_admin_product_path, class:'glyphicon glyphicon-plus-sign' %>
-   </label>
-
+   <span>
+     <%= link_to("", new_admin_product_path, class: 'glyphicon glyphicon-plus-sign') %>
+   </span>
 </h3>
-
 
 <table class="table table-hover table-inverse">
     <thead>
@@ -27,10 +24,9 @@
               <%= product.id %>
             </td>
             <td>
-              <%= link_to product.name, admin_product_path(product) %>
+              <%= link_to(product.name, admin_product_path(product.id)) %>
             </td>
             <td>
-              <!-- ここは税抜価格の表示でOK -->
               <%= product.price %>
             </td>
             <td>

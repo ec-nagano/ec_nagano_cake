@@ -1,4 +1,4 @@
-<h2>注文一覧画面</h1>
+<h3>注文一覧画面</h3>
 
 <table class="table">
 	<tr class="active">
@@ -9,20 +9,20 @@
 	</tr>
 
 	<% @orders.each do |order| %>
+		<%# 注文に紐付くcustomer とordered_items を変数に代入  %>
 		<% customer = order.customer %>
 		<% ordered_items = order.ordered_items %>
-
 		<!-- 注文商品の個数の合計を求める -->
 		<% sum = 0 %>
 		<% ordered_items.each do |item| %>
 			<% sum += item.amount %>
 		<% end %>
-	<tr>
-		<td><%= link_to order.created_at.strftime("%Y-%m-%d %H:%M"), admin_order_path(order.id) %></td>
-		<td><%= customer.first_name + customer.last_name %></td>
-		<td><%= sum %></td>
-		<td><%= order.status %></td>
-	</tr>
+		<tr>
+			<td><%= link_to(order.created_at.strftime("%Y-%m-%d %H:%M"), admin_order_path(order.id)) %></td>
+			<td><%= customer.first_name + customer.last_name %></td>
+			<td><%= sum %></td>
+			<td><%= order.status %></td>
+		</tr>
 	<% end %>
 
 	<div class="row">
@@ -30,11 +30,10 @@
     		<%= paginate @orders %>
     	</div>
 	</div>
-
-	<%= paginate @orders %>
 </table>
 
 <style>
 table{
 	width: 50%
 }
+</style>

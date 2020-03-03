@@ -3,7 +3,7 @@
 	<h3>マイページ</h3>
 	<ul class="link">
 		<li><h3>登録情報</h3></li>
-		<li><%= link_to '編集する',edit_customer_registration_path(@customer.id),class: "btn btn-primary 20px" %>
+		<li><%= link_to '編集する',edit_customer_registration_path,class: "btn btn-primary 20px" %>
 		</li>
 		<li>
 		<%= link_to 'パスワードを変更する',edit_customer_registration_path(@customer.id),class: "btn btn-primary 20px" %>

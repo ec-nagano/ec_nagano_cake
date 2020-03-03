@@ -6,59 +6,54 @@
   　</div>
 <% end %>
 
-<div class="container">
-    <div class="row">
-      <%= form_for(@product, url: "/admin/products/#{@product.id}", :method=>:patch) do |f| %>
+  <div class="row">
+    <%= form_with(model: @product, url: admin_product_path(@product.id), method: :PATCH) do |f| %>
         <div class="col-sm-4">
-                <%= attachment_image_tag @product, :product_image, :fill, 250, 200, format: 'jpeg', fallback: "no_image.jpg", size: '250x200' %>
-                <%= f.attachment_field :product_image %>
+                <%= attachment_image_tag(@product, :product_image, :fill, 250, 200, format: 'jpeg') %>
+                <%= f.attachment_field(:product_image) %>
         </div>
 
         <div class="col-sm-5">
           <div class="product_edit_field">
             <span class="edit_title">商品名</span>
-            <span class="edit_content"><%= f.text_field :name %></span>
+            <span class="edit_content"><%= f.text_field(:name) %></span>
           </div>
 
           <div class="product_edit_field">
             <span class="edit_title">商品説明</span>
-            <span class="edit_content"><%= f.text_area :content %></span>
+            <span class="edit_content"><%= f.text_area(:content) %></span>
           </div>
 
-          <div class="product_edit_field"><!-- ジャンル名を表示させるためにカテゴリーモデルからデータをひっぱってくる　-->
+          <div class="product_edit_field">
             <span class="edit_title">ジャンル</span>
             <span class="edit_content">
-              <%= f.collection_select(:category_id, Category.where(is_active: true), :id, :name)%>
+              <%= f.collection_select(:category_id, @active_category, :id, :name)%>
             </span>
           </div>
 
           <div class="product_edit_field">
             <span class="edit_title">税抜価格</span>
-            <span class="edit_content"><%= f.text_field :price %> 円</span>
+            <span class="edit_content"><%= f.text_field(:price) %> 円</span>
           </div>
 
           <div class="product_edit_field">
             <span class="edit_title">販売ステータス</span>
             <span class="edit_content">
-              <%= f.select :is_active, [["販売中", true],["売り切れ", false]] , include_blank: "選択して下さい" %>
+              <%= f.select(:is_active, [["販売中", true],["売り切れ", false]] , include_blank: "選択して下さい") %>
             </span>
           </div>
 
-        </div>
-
-        <div class="col-sm-3"><!-- 変更ボタン -->
+        <div class="col-sm-3">
           <div class="product_edit_action">
             <%= f.submit("変更を保存", class: "btn btn-primary") %>
           </div>
         </div>
 
       <% end %>
-    </div>
 </div>
 
 
 <style>
-
   h3 {  margin: 0 0 0 10px ; }
   .row  { margin: 45px 0 0 30px ; }
   input[type="file"] { display: block; font-size: 15px; margin-top: 50px; }
@@ -66,5 +61,4 @@
   .edit_title {display: inline-block; width: 150px; }
   .edit_content {display: inline-block; width: 200px;}
   .btn-primary { position: relative; top: 250px; left: 120px ;}
-
 </style>

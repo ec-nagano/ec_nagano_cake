@@ -1,10 +1,11 @@
 class HomesController < ApplicationController
 
 	before_action :ensure_active_customer, only: [:top]
+
 	def top
 		#ランダムにproductのレコードを取得
 		@products = Product.order("random()").limit(4)
-		render :layout => "top"
+		render(layout: "top")
 	end
 
 	def about
@@ -20,4 +21,5 @@ class HomesController < ApplicationController
 			redirect_to about_path
 		end
 	end
+	
 end
