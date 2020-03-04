@@ -52,9 +52,9 @@ class OrdersController < ApplicationController
                 address: params[:new_address],
                 name: params[:new_recipient]
             )
-            if address.invalid?
+            if address.valid?
                 address.save
-                flash[:notice].now = "住所を登録しました。"
+                flash.now[:notice] = "住所を登録しました。"
             else
                 @addresses = ShippingAddress.where(customer_id: current_customer.id)
                 flash[:notice] = "新しい住所に不備があります。"
