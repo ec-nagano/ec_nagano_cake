@@ -13,22 +13,22 @@
 
 # Introduction
 
-DMM WEB CAMP２ヶ月目のチーム開発での製作物です。
-ケーキ販売店のECサイトのデモアプリです。
+DMM WEB CAMP２ヶ月目のチーム開発での製作物です。  
+ケーキ販売店のECサイトのデモアプリです。  
 管理者としてログインした場合、商品の登録、注文状況の管理等ができ、顧客としてログインした場合、
 商品をカートに追加、注文等の処理をすることができます。
 # How to start
 
 ```
 $ git clone https://github.com/ec-nagano/ec_nagano_cake.git
-$ cd ec_naganocake
+$ cd ec_nagano_cake
 $ rails db:migrate
 $ rails s -b 0.0.0.0
 ```
-[ローカルサーバー](http://localhost:3000/)にアクセスしてください。
-管理者としてログインする場合、[http://localhost:3000/admins/sign_in](http://localhost:3000/admins/sign_in)にアクセスし、
-メールアドレス：　**ec_nagano_cake@email**
-パスワード：　**password**
+[ローカルサーバー](http://localhost:3000/)にアクセスしてください。  
+管理者としてログインする場合、[http://localhost:3000/admins/sign_in](http://localhost:3000/admins/sign_in)にアクセスし、  
+メールアドレス：　**ec_nagano_cake@email**  
+パスワード：　**password**  
 で、ログインしてください。
 
 # Team member
@@ -52,6 +52,6 @@ $ rails s -b 0.0.0.0
     - 顧客側商品情報処理関連
     - レイアウト
 
-#　README.md　Author
-[stat-ki](https://github.com/stat-ki)
+# README.md　Author
+[stat-ki](https://github.com/stat-ki)  
 mail to: per_ik at outlook.com
