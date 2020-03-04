@@ -8,7 +8,7 @@
 
 <div class="row">
 
-  <%= form_with(model: @product, url: admin_product_path(@product.id), method: :PATCH) do |f| %>
+  <%= form_with(model: @product, url: admin_product_path(@product.id), local: true, method: :PATCH) do |f| %>
 
     <div class="col-sm-4">
       <%= attachment_image_tag(@product, :product_image, :fill, 250, 200, format: 'jpeg') %>

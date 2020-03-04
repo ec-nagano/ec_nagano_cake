@@ -8,7 +8,7 @@
 
 <div class="admin_category_new">
 
-  <%= form_with(model: @category, url: admin_categories_path, method: :POST) do |f| %>
+  <%= form_with(model: @category, url: admin_categories_path, method: :POST, local: true) do |f| %>
 
     <div class="category_new_field">
       <span class="category_new">ジャンル</span>
