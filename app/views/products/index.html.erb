@@ -7,7 +7,11 @@
       <% else %>
         <%= @category.name %>一覧
       <% end %>
+      <% if @products.blank? %>
+        /商品がありません
+      <% end %>
     </h3>
+
     <div class="row">
       <% @products.each do |product| %>
         <div class="col-xs-4 product-container">
@@ -18,6 +22,10 @@
           </ul>
         </div>
       <% end %>
+    </div>
+  </div>
+</div>
+
   <div>
   <div class="row">
     <div class="col-md-4 col-md-offset-6">
