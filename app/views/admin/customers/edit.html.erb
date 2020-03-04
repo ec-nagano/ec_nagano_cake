@@ -13,7 +13,7 @@
     <span class="customer_edit_content"><%= @customer.id %></span>
   </div>
 
-  <%= form_with(model: @customer, url: admin_customer_path(@customer.id), method: :PATCH) do |f| %>
+  <%= form_with(model: @customer, url: admin_customer_path(@customer.id), method: :PATCH, local: true) do |f| %>
 
     <div class="customer_edit_field">
       <span class="customer_edit_title">氏名</span>

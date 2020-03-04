@@ -8,7 +8,7 @@
 
 <div class="row">
 
-  <%= form_with(model: @product, url: admin_products_path) do |f| %>
+  <%= form_with(model: @product, url: admin_products_path, local: true) do |f| %>
 
     <%# アップロードした画像をプレビューする %>
     <div class="col-sm-3">

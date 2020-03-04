@@ -8,7 +8,7 @@
 
 <div class="admin_category_edit">
 
-  <%= form_with(model: @category, url: admin_category_path(@category.id), method: :PATCH) do |f| %>
+  <%= form_with(model: @category, url: admin_category_path(@category.id), method: :PATCH, local: true) do |f| %>
 
     <span class="category_edit">ジャンル</span>
     <span class="category_edit"><%= f.text_field :name %></span>
