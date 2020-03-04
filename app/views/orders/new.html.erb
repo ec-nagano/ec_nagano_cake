@@ -1,5 +1,3 @@
-<div class="row">
-
 <h2>購入情報入力</h2>
     <%# confirmコントローラでordersモデルに保存する値を判定するため、引数にモデルを定義しない %>
     <%= form_with(url: orders_cofirm_path, local: true, method: :post) do |f| %>
@@ -58,7 +56,6 @@
             <%= f.submit("確認画面へ進む", class: "btn btn-primary") %>
         </div>
     <% end %>
-</div>
 
 
 <style>
