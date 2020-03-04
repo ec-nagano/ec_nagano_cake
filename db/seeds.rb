@@ -5,3 +5,10 @@
 #
 #   movies = Movie.create([{ name: 'Star Wars' }, { name: 'Lord of the Rings' }])
 #   Character.create(name: 'Luke', movie: movies.first)
+
+#adminの初期データ
+Admin.create(email: "ec_nagano_cake@email", password: "password")
+
+#categoryの初期データ
+categories = ["ケーキ", "プリン", "焼き菓子", "キャンディ"]
+categories.each { |category| Category.create(name: category) }
