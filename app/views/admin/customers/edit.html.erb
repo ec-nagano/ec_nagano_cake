@@ -20,30 +20,36 @@
       <span class="customer_edit_content"><%= f.text_field(:first_name) %><%= f.text_field (:last_name) %></span>
     </div>
 
+
     <div class="customer_edit_field">
       <span class="customer_edit_title">フリガナ</span>
       <span class="customer_edit_content"><%= f.text_field(:first_name_kana) %><%= f.text_field(:last_name_kana) %></span>
     </div>
+
 
     <div class="customer_edit_field">
       <span class="customer_edit_title">郵便番号</span>
       <span class="customer_edit_content"><%= f.text_field(:postcode) %></span>
     </div>
 
+
     <div class="customer_edit_field">
 	   <span class="customer_edit_title">住所</span>
 	   <span class="customer_edit_content"><%= f.text_field(:address) %></span>
     </div>
+
 
     <div class="customer_edit_field">
 	   <span class="customer_edit_title">電話番号</span>
 	   <span class="customer_edit_content"><%= f.telephone_field(:phone_number) %></span>
     </div>
 
+
     <div class="customer_edit_field">
 	   <span class="customer_edit_title">メールアドレス</span>
 	   <span class="customer_edit_content"><%= f.email_field(:email) %></span>
     </div>
+
 
     <div class="customer_edit_field">
       <span class="customer_edit_title">会員ステータス</span>
@@ -52,6 +58,7 @@
 	      <label><%=f.radio_button(:is_active, false) %>退会済み</label>
       </span>
     </div>
+
 
     <div class="customer_edit_action">
       <%= f.submit("変更を保存する", class: "btn btn-primary") %>

@@ -7,10 +7,12 @@
 <% end %>
 
 <div class="admin_category_edit">
+
   <%= form_with(model: @category, url: admin_category_path(@category.id), method: :PATCH) do |f| %>
 
     <span class="category_edit">ジャンル</span>
     <span class="category_edit"><%= f.text_field :name %></span>
+
 
     <span class="category_edit">
       <!-- ラジオボタン -->
@@ -18,11 +20,13 @@
       <label><%=f.radio_button(:is_active, false) %>無効</label>
     </span>
 
+
     <span class="category_edit">
       <%= f.submit("変更を保存する", class: "btn btn-primary") %>
     </span>
 
   <% end %>
+
 </div>
 
 <style>
