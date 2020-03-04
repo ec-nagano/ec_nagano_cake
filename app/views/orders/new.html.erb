@@ -1,5 +1,3 @@
-<div class="row">
-
 <h2>購入情報入力</h2>
     <%# confirmコントローラでordersモデルに保存する値を判定するため、引数にモデルを定義しない %>
     <%= form_with(url: orders_cofirm_path, local: true, method: :post) do |f| %>
@@ -34,7 +32,7 @@
         </div>
         <!-- selectのsizeの指定をするとinclude_blankの”選択してください”が下に表示されてしまいます。 -->
         <div class="content">
-            <%= f.collection_select(:existing_address, @addresses, :id, :postcode ,include_blank: '選択してください') %>
+            <%= f.collection_select(:existing_address, @addresses, :id, :postcode) %>
         </div>
         <div class="content">
              <%= f.radio_button(:address_type, 2) %>新しいお届け先
@@ -58,7 +56,6 @@
             <%= f.submit("確認画面へ進む", class: "btn btn-primary") %>
         </div>
     <% end %>
-</div>
 
 
 <style>
