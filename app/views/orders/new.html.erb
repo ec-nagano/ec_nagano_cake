@@ -34,7 +34,7 @@
         </div>
         <!-- selectのsizeの指定をするとinclude_blankの”選択してください”が下に表示されてしまいます。 -->
         <div class="content">
-            <%= f.collection_select(:existing_address, @addresses, :id, :postcode ,include_blank: '選択してください') %>
+            <%= f.collection_select(:existing_address, @addresses, :id, :postcode) %>
         </div>
         <div class="content">
              <%= f.radio_button(:address_type, 2) %>新しいお届け先
