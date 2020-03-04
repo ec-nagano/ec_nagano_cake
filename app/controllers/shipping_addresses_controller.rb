@@ -1,7 +1,7 @@
 class ShippingAddressesController < ApplicationController
 
   before_action :authenticate_customer!
-  before_action :ensure_correct_customer, except: [:index]
+  before_action :ensure_correct_customer, except: [:index, :create]
 
   def index
     @shipping_address = ShippingAddress.new
@@ -16,7 +16,8 @@ class ShippingAddressesController < ApplicationController
       flash[:notice] = "住所を保存しました"
       redirect_to(shipping_addresses_path)
     else
-      @shipping_addresses=ShippingAddress.all
+      @shipping_address = shipping_address
+      @shipping_addresses = ShippingAddress.all
       flash[:notice] = "入力内容に不備があります"
       render(:index)
     end
