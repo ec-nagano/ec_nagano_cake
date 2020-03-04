@@ -1,53 +1,53 @@
 
 <h3> 商品　詳細画面 </h3>
 
-    <div class="row">
-        <div class="col-sm-4">
-            <div class="admin_product_show_image">
-                <%= attachment_image_tag(@product, :product_image, :fill, 250, 200, format: 'jpeg') %>
-            </div>
-        </div>
+<div class="row">
 
-        <div class="col-sm-5">
-
-            <h5>
-                <span class="title">商品名</span>
-                <span class="content"><%= @product.name %></span>
-            </h5>
-
-
-            <h5>
-                <span class="title">商品説明</span>
-                <span class="content"><%= @product.content %></span>
-            </h5>
-
-
-            <h5>
-                <span class="title">ジャンル</span>
-                <span class="content"><%= @product.category.name %></span>
-            </h5>
-
-            <h5>
-                <span class="title">税込価格（税抜価格）</span>
-                <span class="content"><%= (@product.price * (1 + $tax_rate)).round %> &nbsp; ( <%= @product.price %> )&nbsp;円</span>
-            </h5>
-
-            <h5>
-                <span class="title">販売ステータス</span>
-                <span class="content">
-                    <% if @product.is_active == true %>
-                        販売中
-                    <% else %>
-        　              売り切れ
-                    <% end %>
-                </span>
-            </h5>
-        </div>
-
-        <div class="col-sm-3">
-          <%= link_to("編集する", edit_admin_product_path(@product), class:'btn btn-primary') %>
+    <div class="col-sm-4">
+        <div class="admin_product_show_image">
+            <%= attachment_image_tag(@product, :product_image, :fill, 250, 200, format: 'jpeg') %>
         </div>
     </div>
+
+    <div class="col-sm-5">
+
+        <h5>
+            <span class="title">商品名</span>
+            <span class="content"><%= @product.name %></span>
+        </h5>
+
+        <h5>
+            <span class="title">商品説明</span>
+            <span class="content"><%= @product.content %></span>
+        </h5>
+
+        <h5>
+            <span class="title">ジャンル</span>
+            <span class="content"><%= @product.category.name %></span>
+        </h5>
+
+        <h5>
+            <span class="title">税込価格（税抜価格）</span>
+            <span class="content"><%= (@product.price * (1 + $tax_rate)).round %> &nbsp; ( <%= @product.price %> )&nbsp;円</span>
+        </h5>
+
+        <h5>
+            <span class="title">販売ステータス</span>
+            <span class="content">
+                <% if @product.is_active == true %>
+                    販売中
+                <% else %>
+                    売り切れ
+                <% end %>
+            </span>
+        </h5>
+
+    </div>
+
+    <div class="col-sm-3">
+        <%= link_to("編集する", edit_admin_product_path(@product), class:'btn btn-primary') %>
+    </div>
+
 </div>
 
 <style>

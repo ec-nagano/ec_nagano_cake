@@ -6,58 +6,64 @@
   　</div>
 <% end %>
 
-    <div class="row">
+<div class="row">
 
-      <%= form_with(model: @product, url: admin_products_path) do |f| %>
+  <%= form_with(model: @product, url: admin_products_path) do |f| %>
 
-      <%# アップロードした画像をプレビューする %>
-	    <div class="col-sm-3">
-        <div class="view_box">
-          <label for="product_product_image" class="file_field btn">
-            ファイルを選択
-            <%= f.attachment_field(:product_image, type: 'file', class:'file') %>
-          </label>
-        </div>
+    <%# アップロードした画像をプレビューする %>
+    <div class="col-sm-3">
+      <div class="view_box">
+        <label for="product_product_image" class="file_field btn">
+          ファイルを選択
+          <%= f.attachment_field(:product_image, type: 'file', class:'file') %>
+        </label>
+      </div>
+    </div>
+
+    <div class="col-sm-5">
+
+      <div class="product_new_field">
+        <span class="new_title">商品名</span>
+        <span class="new_content"><%= f.text_field(:name) %></span>
       </div>
 
-      <div class="col-sm-5">
-        <div class="product_new_field">
-          <span class="new_title">商品名</span>
-          <span class="new_content"><%= f.text_field(:name) %></span>
-        </div>
 
-        <div class="product_new_field">
-          <span class="new_title">商品説明</span>
-      	  <span class="new_content"><%= f.text_area(:content) %></span>
-        </div>
-
-        <div class="product_new_field"><!-- ジャンル名を表示させるためにカテゴリーモデルからデータをひっぱってくる　-->
-          <span class="new_title">ジャンル</span>
-          <span class="new_content"><%= f.collection_select(:category_id, @active_category, :id, :name, include_blank: "選択して下さい" )%></span>
-        </div>
-
-
-        <div class="product_new_field">
-      	 <span class="new_title">税抜価格</span>
-      	 <span class="new_content"><%= f.text_field(:price) %> 円 </span>
-        </div>
-
-        <div class="product_new_field">
-          <span class="new_title">販売ステータス</span>
-      	  <span class="new_content">
-            <%= f.select(:is_active, [["販売中", true],["売り切れ", false]] , include_blank: "選択して下さい") %>
-          </span>
-        </div>
-
+      <div class="product_new_field">
+        <span class="new_title">商品説明</span>
+        <span class="new_content"><%= f.text_area(:content) %></span>
       </div>
 
-      <div class="col-sm-4">
-        <div class="product_new_action">
-  	      <%= f.submit("新規登録", class: "btn btn-primary") %>
-        </div>
+
+      <div class="product_new_field"><!-- ジャンル名を表示させるためにカテゴリーモデルからデータをひっぱってくる　-->
+        <span class="new_title">ジャンル</span>
+        <span class="new_content"><%= f.collection_select(:category_id, @active_category, :id, :name, include_blank: "選択して下さい" )%></span>
       </div>
-    <% end %>
-  </div>
+
+
+      <div class="product_new_field">
+        <span class="new_title">税抜価格</span>
+        <span class="new_content"><%= f.text_field(:price) %> 円 </span>
+      </div>
+
+
+      <div class="product_new_field">
+        <span class="new_title">販売ステータス</span>
+        <span class="new_content">
+          <%= f.select(:is_active, [["販売中", true],["売り切れ", false]] , include_blank: "選択して下さい") %>
+        </span>
+      </div>
+    </div>
+
+
+    <div class="col-sm-4">
+      <div class="product_new_action">
+        <%= f.submit("新規登録", class: "btn btn-primary") %>
+      </div>
+    </div>
+
+  <% end %>
+
+</div>
 
 <style>
   .col-sm-5 { position: relative; top: 40px; }
@@ -71,4 +77,3 @@
   .new_content {display: inline-block; width: 200px;}
   .btn-primary { position: relative; top: 250px; left: 120px ;}
 </style>
-
