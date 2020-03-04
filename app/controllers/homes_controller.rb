@@ -18,7 +18,7 @@ class HomesController < ApplicationController
 		if customer_signed_in? && current_customer.is_active == false
 			sign_out
 			flash[:notice] = "退会済みです"
-			redirect_to about_path
+			redirect_to(root_path)
 		end
 	end
 	
