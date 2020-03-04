@@ -10,6 +10,85 @@
   </head>
 
   <body>
-    <%= yield %>
+    <header>
+      <nav class="navbar navbar-main navbar-shadow" role="navigation" id="slide-nav">
+        <div class="container">
+          <div class="navbar-header">
+            <a class="navbar-logo" href="/">
+              <%= image_tag('logo.jpg') %>
+            </a>
+          </div>
+          <div id="slidemenu">
+            <ul class="nav navbar-nav navbar-right" data-hover="dropdown" data-animations="zoomIn fadeIn fadeInUp fadeIn">
+              <% if current_customer %>
+                <li>
+                  <%= link_to("#{current_customer.first_name}様", "/customer/#{current_customer.id}") %>
+                </li>
+                <li>
+                  <%= link_to("ログアウト", destroy_customer_session_path, method: :delete) %>
+                </li>
+                <li>
+                  <%= link_to("カートを見る", cart_items_path) %>
+                </li>
+              <% elsif current_admin %>
+                <form class="navbar-form">
+                  <div class="form-group">
+                    <input type="text" class="form-control" placeholder="キーワード">
+                  </div>
+                  <button type="submit" class="btn btn-info">検索</button>
+                </form>
+                <li>
+                  <%= link_to("商品一覧", admin_products_path) %>
+                </li>
+                <li>
+                  <%= link_to("会員一覧", admin_customers_path) %>
+                </li>
+                <li>
+                  <%= link_to("注文履歴一覧", admin_orders_path) %>
+                </li>
+                <li>
+                  <%= link_to("ジャンル管理", admin_categories_path) %>
+                </li>
+                <li>
+                  <%= link_to("ログアウト", destroy_admin_session_path, method: :delete) %>
+                </li>
+              <% else %>
+                <li>
+                  <%= link_to("ながのCAKEについて", about_path) %>
+                </li>
+                <li>
+                  <%= link_to("ログイン", new_customer_session_path) %>
+                </li>
+                <li>
+                  <%= link_to("会員登録はこちら", new_customer_registration_path) %>
+                </li>
+              <% end %>
+            </ul>
+          </div>
+        </div>
+      </nav>
+    </header>
+
+    <div class="body">
+      <div class="container">
+        <p class="notice"><%= notice %></p>
+        <div class="row">
+          <%= yield %>
+        </div>
+      </div>
+    </div>
+
+    <footer class="footer">
+      <div class="container">
+        <p class="text-center text-muted">©︎ながのCAKE</p>
+      </div>
+    </footer>
   </body>
 </html>
+
+  <style>
+  .notice{
+    color: red;
+    font-size: 18px;
+  }
+  </style>

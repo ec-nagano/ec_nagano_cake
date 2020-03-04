@@ -1,0 +1,39 @@
+<h3>注文一覧画面</h3>
+
+<table class="table">
+	<tr class="active">
+		<th>購入日時</th>
+		<th>購入者</th>
+		<th>注文個数</th>
+		<th>注文ステータス</th>
+	</tr>
+
+	<% @orders.each do |order| %>
+		<%# 注文に紐付くcustomer とordered_items を変数に代入  %>
+		<% customer = order.customer %>
+		<% ordered_items = order.ordered_items %>
+		<!-- 注文商品の個数の合計を求める -->
+		<% sum = 0 %>
+		<% ordered_items.each do |item| %>
+			<% sum += item.amount %>
+		<% end %>
+		<tr>
+			<td><%= link_to(order.created_at.strftime("%Y-%m-%d %H:%M"), admin_order_path(order.id)) %></td>
+			<td><%= customer.first_name + customer.last_name %></td>
+			<td><%= sum %></td>
+			<td><%= order.status %></td>
+		</tr>
+	<% end %>
+
+	<div class="row">
+    	<div class="col-md-4 col-md-offset-6">
+    		<%= paginate @orders %>
+    	</div>
+	</div>
+</table>
+
+<style>
+table{
+	width: 50%
+}
+</style>

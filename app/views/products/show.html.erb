@@ -1,0 +1,32 @@
+<div class="row">
+  <%= render('category_form', categories: @categories) %>
+  <div class="col-xs-4">
+    <%= attachment_image_tag(@product, :product_image, size:  "350x300", format: 'jpeg') %>
+  </div>
+  <div class="col-xs-5">
+    <div class="panel panel-warning">
+      <div class="panel-heading">
+        <div class="panel-title">
+          <%= @product.name %>
+        </div>
+      </div>
+      <div class="panel-body">
+        <h4>商品説明</h4>
+        <p><%= @product.content %></p>
+        <h4>価格</h4>
+        <p><span class="price">￥<%= (@product.price * (1 + $tax_rate)).round.to_s %></span>（税込）</p>
+      </div>
+    </div>
+    <%= form_with(model: @cart_item, url: cart_items_path, local: true) do |f| %>
+      <%= f.number_field(:amount, min: 1) %>
+      <%= f.hidden_field(:product_id, value: @product.id) %>
+      <%= f.submit('カートに入れる',class: "btn btn-primary") %>
+    <% end %>
+  </div>
+</div>
+<style>
+  .price {
+    font-size: 20px;
+    font-weight: bold;
+  }
+</style>

@@ -1,0 +1,35 @@
+<h3> ジャンル編集画面 </h3>
+
+<% if @category.errors.any? %>
+  <div id="error_explanation">
+    <h4>【 入力されていない項目があります。 】</h4>
+  </div>
+<% end %>
+
+<div class="admin_category_edit">
+
+  <%= form_with(model: @category, url: admin_category_path(@category.id), method: :PATCH, local: true) do |f| %>
+
+    <span class="category_edit">ジャンル</span>
+    <span class="category_edit"><%= f.text_field :name %></span>
+
+
+    <span class="category_edit">
+      <!-- ラジオボタン -->
+      <label><%=f.radio_button(:is_active, true) %>有効</label>
+      <label><%=f.radio_button(:is_active, false) %>無効</label>
+    </span>
+
+
+    <span class="category_edit">
+      <%= f.submit("変更を保存する", class: "btn btn-primary") %>
+    </span>
+
+  <% end %>
+
+</div>
+
+<style>
+  h3 { margin: 0 0 40px 0px; }
+  .category_edit { margin-right: 15px; }
+</style>

@@ -1,0 +1,65 @@
+<h3> ジャンル追加・一覧画面 </h3>
+
+<% if @category.errors.any? %>
+　　<div id="error_explanation">
+      <h4>【 入力されていない項目があります。 】</h4>
+    </div>
+<% end %>
+
+<div class="admin_category_new">
+
+  <%= form_with(model: @category, url: admin_categories_path, method: :POST, local: true) do |f| %>
+
+    <div class="category_new_field">
+      <span class="category_new">ジャンル</span>
+      <span class="category_new"><%= f.text_field :name %></span>
+
+      <span class="category_new">
+        <!-- ラジオボタン -->
+        <label><%=f.radio_button(:is_active, true) %>有効</label>
+        <label><%=f.radio_button(:is_active, false) %>無効</label>
+      </span>
+
+      <%= f.submit("追加", class: "btn btn-primary") %>
+
+    </div>
+
+  <% end %>
+
+</div>
+
+<table class="table table-hover table-inverse">
+  <thead>
+    <tr class="active">
+      <th>ジャンル</th>
+      <th>状態</th>
+      <th></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @categories.each do |category| %>
+      <tr>
+        <td>
+          <%= category.name %>
+        </td>
+        <td>
+          <% if category.is_active == true %>
+            有効
+          <% else %>
+            無効
+          <% end %>
+        </td>
+        <td>
+          <%= link_to("編集", edit_admin_category_path(category), class:'btn btn-primary') %>
+        </td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<style>
+  h3 { margin: 0 0 40px 0px; }
+  .category_new_field { margin-bottom: 30px; }
+  .category_new { margin-right: 5px; }
+</style>

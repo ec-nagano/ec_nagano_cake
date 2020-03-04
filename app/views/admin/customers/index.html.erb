@@ -1,0 +1,41 @@
+<h3> 会員一覧画面 </h3>
+
+<table class="table table-hover table-inverse">
+    <thead>
+    	<tr class="active">
+      　　<th>会員ID</th>
+      　　<th>氏名</th>
+      　　<th>メールアドレス</th>
+      　　<th>ステータス</th>
+      </tr>
+    </thead>
+
+    <tbody>
+        <% @customers.each do |customer| %>
+          <tr>
+            <td>
+              <%= customer.id %>
+            </td>
+            <td>
+              <%= link_to(customer.first_name + customer.last_name, admin_customer_path(customer)) %>
+            </td>
+            <td>
+              <%= customer.email %>
+            </td>
+            <td>
+              <% if customer.is_active == true %>
+                有効
+              <% else %>
+                退会済
+              <% end %>
+            </td>
+          </tr>
+        <% end %>
+    </tbody>
+</table>
+
+<div class="row">
+  <div class="col-md-4 col-md-offset-6">
+    <%= paginate @customers, class: "paginate" %>
+  </div>
+</div>

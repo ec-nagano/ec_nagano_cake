@@ -1,0 +1,85 @@
+<div class="container">
+  <div class="row">
+	<h3>マイページ</h3>
+	<ul class="link">
+		<li><h3>登録情報</h3></li>
+		<li><%= link_to '編集する',edit_customer_registration_path,class: "btn btn-primary 20px" %>
+		</li>
+		<li>
+		<%= link_to 'パスワードを変更する',edit_customer_registration_path(@customer.id),class: "btn btn-primary 20px" %>
+		</li>
+	</ul>
+		<table class="profile">
+			<tr>
+				<th>氏名</th>
+				<td><%= current_customer.first_name+current_customer.last_name %>
+				</td>
+			</tr>
+			<tr>
+				<th>カナ</th>
+				<td><%= current_customer.first_name_kana+current_customer.last_name_kana %></td>
+			</tr>
+			<tr>
+				<th>郵便番号</th>
+				<td><%= current_customer.postcode %></td>
+			</tr>
+			<tr>
+				<th>住所</th>
+				<td><%= current_customer.address %></td>
+			</tr>
+			<tr>
+				<th>電話番号</th>
+				<td><%= current_customer.phone_number %></td>
+			</tr>
+			<tr>
+				<th>メールアドレス</th>
+				<td><%= current_customer.email %></td>
+			</tr>
+		</table>
+	<ul class="link">
+	<li><h3>配送先</h3></li>
+	<li><span class="blank"></span>
+		<%= link_to '一覧を見る',shipping_addresses_path(@customer.id),class: "btn btn-primary 20px" %></li>
+	</ul>
+	<ul class="link">
+	<li><h3>注文履歴</h3></li>
+	<li><%= link_to '一覧を見る',orders_path(@customer.id),class: "btn btn-primary 20px" %></li>
+	</ul>
+</div>
+</div>
+
+
+<style>
+ul {
+    list-style-type: none;
+    padding: 0;
+    margin:0;
+}
+
+.link li{
+	display: inline-block;
+	margin-top: 20px;
+}
+.link li h3{
+	padding: 0;
+	text-indent: 0;
+	margin-right: 10px;
+}
+.profile th {
+border: 1px solid #ccc;
+padding: 5px;
+font-size: 16px;
+background-color: #dedede;
+width: 200px;
+}
+
+.profile td {
+border: 1px solid #ccc;
+padding: 5px;
+font-size: 16px;
+width: 400px;
+}
+.blank{margin-left: 24px;
+
+}
+</style>

@@ -1,0 +1,66 @@
+<h3> 会員詳細画面 </h3>
+
+<h5>
+  <span class="customer_title">顧客ID</span>
+  <span class="customer_content">
+    <span class="customer_id"><%= @customer.id %>
+    <span class="customer_status">
+      <% if @customer.is_active == true %>
+        有効会員
+      <% else %>
+        無効会員
+      <% end %>
+    </span>
+  </span>
+</h5>
+
+<h5>
+  <span class="customer_title">氏名</span>
+  <span class="customer_content"><%= @customer.first_name + @customer.last_name %></span>
+</h5>
+
+
+<h5>
+  <span class="customer_title">フリガナ</span>
+  <span class="customer_content"><%= @customer.first_name_kana + @customer.last_name_kana %></span>
+</h5>
+
+
+<h5>
+  <span class="customer_title">郵便番号</span>
+  <span class="customer_content"><%= @customer.postcode %></span>
+</h5>
+
+
+<h5>
+  <span class="customer_title">住所</span>
+  <span class="customer_content"><%= @customer.address %></span>
+</h5>
+
+
+<h5>
+  <span class="customer_title">電話番号</span>
+  <span class="customer_content"><%= @customer.phone_number %></span>
+</h5>
+
+
+<h5>
+  <span class="customer_title">メールアドレス</span>
+  <span class="customer_content"><%= @customer.email %></span>
+</h5>
+
+
+<div class="action">
+  <%= link_to("編集する", edit_admin_customer_path(@customer), class:'btn btn-primary') %>
+  <%= link_to("注文履歴一覧を見る", admin_orders_path, class:'btn btn-primary') %>
+</div>
+
+
+<style>
+  h3{ margin-bottom: 40px; }
+  h5 { margin-bottom: 30px; }
+  .customer_title { display: inline-block; width: 150px; }
+  .customer_content { display: inline-block; width: 200px; }
+  .customer_status { border: 1px solid black; background-color: #87CEFA; padding: 2px; margin-left: 10px; border-radius:5px; }
+  .action { position: relative; top: 50px;}
+</style>

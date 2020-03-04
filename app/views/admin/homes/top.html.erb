@@ -1,0 +1,24 @@
+<h3 id="topic" class="row">管理者画面</h3>
+<div class="row">
+    <div class="col-md-4">
+        <h3 id="order">本日の注文件数</h3>
+    </div>
+    <div class="col-md-8">
+        <%= link_to(@count, admin_orders_path, class: "link") %><span>件</span>
+    </div>
+</div>
+
+<style>
+#topic { font-family: arial black; }
+#order { font-family: arial; }
+.row { margin-top: 30px; }
+.link {
+    font-family: arial;
+    font-size: 30px;
+}
+span {
+    font-family: arial;
+    font-size: 30px;
+}
+.col-md-8 { padding-top: 15px; }
+</style>

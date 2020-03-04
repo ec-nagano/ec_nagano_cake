@@ -1,0 +1,75 @@
+<h3> 会員編集画面 </h3>
+
+<% if @customer.errors.any? %>
+　  <div id="error_explanation">
+      <h4>【 入力されていない項目があります。 】</h4>
+  　</div>
+<% end %>
+
+<div class="customer_edit">
+
+  <div class="customer_edit_field">
+    <span class="customer_edit_title">会員ID</span>
+    <span class="customer_edit_content"><%= @customer.id %></span>
+  </div>
+
+  <%= form_with(model: @customer, url: admin_customer_path(@customer.id), method: :PATCH, local: true) do |f| %>
+
+    <div class="customer_edit_field">
+      <span class="customer_edit_title">氏名</span>
+      <span class="customer_edit_content"><%= f.text_field(:first_name) %><%= f.text_field (:last_name) %></span>
+    </div>
+
+
+    <div class="customer_edit_field">
+      <span class="customer_edit_title">フリガナ</span>
+      <span class="customer_edit_content"><%= f.text_field(:first_name_kana) %><%= f.text_field(:last_name_kana) %></span>
+    </div>
+
+
+    <div class="customer_edit_field">
+      <span class="customer_edit_title">郵便番号</span>
+      <span class="customer_edit_content"><%= f.text_field(:postcode) %></span>
+    </div>
+
+
+    <div class="customer_edit_field">
+	   <span class="customer_edit_title">住所</span>
+	   <span class="customer_edit_content"><%= f.text_field(:address) %></span>
+    </div>
+
+
+    <div class="customer_edit_field">
+	   <span class="customer_edit_title">電話番号</span>
+	   <span class="customer_edit_content"><%= f.telephone_field(:phone_number) %></span>
+    </div>
+
+
+    <div class="customer_edit_field">
+	   <span class="customer_edit_title">メールアドレス</span>
+	   <span class="customer_edit_content"><%= f.email_field(:email) %></span>
+    </div>
+
+
+    <div class="customer_edit_field">
+      <span class="customer_edit_title">会員ステータス</span>
+      <span class="customer_edit_content">
+	      <label><%=f.radio_button(:is_active, true) %>有効</label>
+	      <label><%=f.radio_button(:is_active, false) %>退会済み</label>
+      </span>
+    </div>
+
+
+    <div class="customer_edit_action">
+      <%= f.submit("変更を保存する", class: "btn btn-primary") %>
+    </div>
+
+  <% end %>
+
+</div>
+
+<style>
+  h3{ margin-bottom: 40px; }
+  .customer_edit_field { margin-bottom: 20px; }
+  .customer_edit_title { display: inline-block; width: 150px; }
+  .customer_edit_action { position: relative; top: 20px;}

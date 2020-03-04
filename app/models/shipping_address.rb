@@ -3,6 +3,6 @@ class ShippingAddress < ApplicationRecord
 
 	validates :customer_id, presence: true
 	validates :name, presence: true
-	validates :postcode, presence: true
-	vakidates :address, presence: true
+	validates :postcode, presence: true, length: { minimum: 7 }, numericality: { only_integer: true }
+	validates :address, presence: true
 end

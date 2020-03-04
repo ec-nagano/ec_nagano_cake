@@ -2,25 +2,24 @@ Rails.application.routes.draw do
   #devise_for :admins
   #devise_for :customers
 
-  namespace :admin do
-  	devise_for :admins, controllers: {
-  		sessions: 'admin/admins/sessions',
-  		passwords: 'admmin/admins/passwords',
-  		registrations: 'admin/admins/registrations'
-  	}
-  end
-  devise_for :customers, controllers: {
+  devise_for :admins, skip: [:registrations, :passwords], controllers: {
+  	sessions: 'admins/sessions',
+  	passwords: 'admins/passwords',
+  	registrations: 'admins/registrations'
+  }
+  devise_for :customers, skip: [:passwords], controllers: {
   	sessions: 'customers/sessions',
   	passwords: 'customers/passwords',
   	registrations: 'customers/registrations'
   }
   # 顧客側
   # homesコントローラー
-  get '/' => 'homes#top'
+  root 'homes#top'
   get 'about' => 'homes#about'
   # customersコントローラ-
-  get 'customers/:id' => 'customers#show'
-  get '/customers/confim_unsubscribing' => 'customers#confirm_unsubscribing'
+  get '/customer/confirm_unsubscribing' => 'customers#confirm_unsubscribing'
+  get 'customer/:id' => 'customers#show'
+
   # shipping_addressesコントローラ
   resources :shipping_addresses, only: [:index, :edit, :update, :destroy, :create]
   #productsコントローラ
@@ -29,9 +28,9 @@ Rails.application.routes.draw do
   resources :cart_items, only: [:index, :create, :destroy, :update]
   delete 'cart_items' => 'cart_items#items_destroy'
   # ordersコントローラ
-  resources :orders, only: [:index, :show, :new, :create]
   post 'orders/cofirm' => 'orders#confirm'
   get 'orders/thanks' => 'orders#thanks'
+  resources :orders, only: [:index, :show, :new, :create]
   # 管理側
   namespace :admin do
 	  # admin/admins(devise)コントローラ

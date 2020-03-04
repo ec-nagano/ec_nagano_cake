@@ -1,0 +1,46 @@
+<h2>注文履歴一覧</h2>
+
+<table class="table table-hover table-inverse">
+
+    <thead>
+        <tr class="active">
+            <th>注文日</th>
+            <th>配送先</th> 
+            <th>注文商品</th> 
+            <th>支払金額</th> 
+            <th>ステータス</th> 
+            <th>注文詳細</th>
+        </tr>
+    </thead>
+    <tbody>
+        <% @orders.each do |order| %>
+            <tr>
+                <td><%= order.created_at.strftime("%Y-%m-%d %H:%M") %></td>
+                <td>
+                    <%= order.postcode %><br>
+                    <%= order.address %><br>
+                    <%= order.recipient %>
+                </td>
+                <td align="center">
+                    <%# orderに紐づけられたordered_itemsを取得し、名前のみ表示 %>
+                    <% order.ordered_items.each do |ordered_item| %>
+                        <%= ordered_item.product.name %><br>
+                    <% end %>
+                </td>
+                <td><%= order.delivery_fee + order.billing_amount %> 円　</td>
+                <td><%= order.status %></td>
+                <td>
+                    <%= link_to("表示する", order_path(order.id), class: "btn btn-primary") %>
+                </td>
+            </tr>
+        <% end %>
+    </tbody>
+</table>
+
+<style>
+
+    h2 { margin-bottom: 50px; }
+    th { text-align: center; }
+    td { text-align: center; border:solid 1px #aaaaaa; }
+
+</style>
