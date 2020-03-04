@@ -17,26 +17,6 @@ DMM WEB CAMP２ヶ月目のチーム開発での製作物です。
 ケーキ販売店のECサイトのデモアプリです。
 管理者としてログインした場合、商品の登録、注文状況の管理等ができ、顧客としてログインした場合、
 商品をカートに追加、注文等の処理をすることができます。
-***デモ***
-
-![デモ](https://image-url.gif)
-
-## 機能
-
-- 機能1（UI/計算 etc ...）
-- 機能2
-- 機能3
-- ...
-
-他の機能はこちらを参照して下さい。`awesome-tool --help`.
-
-## 必要要件
-
-- 要件
-- 要件
-- 要件
-- ...
-
 # How to start
 
 ```
@@ -75,7 +55,3 @@ $ rails s -b 0.0.0.0
 #　README.md　Author
 [stat-ki](https://github.com/stat-ki)
 mail to: per_ik at outlook.com
-
-## ライセンス
-
-[MIT](http://TomoakiTANAKA.mit-license.org)</blockquote>
