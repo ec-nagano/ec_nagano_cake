@@ -1,78 +1,14 @@
-    <div class= "row">
-        <div class="col-md-10">
-            <h3>ショッピングカート</h3>
-        </div>
-        <div class="col-md-2 delete_cart">
-            <%= link_to("カートを空にする", "/cart_items", method: :DELETE, class: "btn btn-danger") %>
-        </div>
+<div class= "row">
+    <div class="col-md-10">
+        <h3>ショッピングカート</h3>
     </div>
+    <div class="col-md-2 delete_cart">
+        <%= link_to("カートを空にする", "/cart_items", remote:true, method: :DELETE, class: "btn btn-danger") %>
+    </div>
+</div>
 
-    <div class="col-md-12">
-        <table class="table table-hover table-inverse table-bordered">
-            <thead>
-                <tr class="active">
-                    <th>商品名</th>
-                    <th>単価（税込）</th>
-                    <th>数量</th>
-                    <th>小計</th>
-                    <th></th>
-                </tr>
-            </thead>
-            <tbody>
-                <%# カート内の商品全ての合計金額を計算する %>
-                <% total_price = 0%>
-                <% @cart_items.each do |cart_item| %>
-                    <tr>
-                        <td>
-                            <%= link_to(product_path(cart_item.product_id)) do %>
-                                <%= attachment_image_tag(cart_item.product, :product_image, :fill, 30, 30) %>
-                                <%= cart_item.product.name %>
-                            <% end %>
-                        </td>
-                        <td>
-                            <span><%= (cart_item.product.price * (1 + $tax_rate)).round %></span>
-                        </td>
-                        <td>
-                            <div class="amount">
-                                <%= form_with(model: cart_item, url: cart_item_path(cart_item.id), local: true, method: :PATCH) do |f| %>
-                                    <%= f.number_field(:amount, min: 1) %>
-                                    <%= f.hidden_field(:product_id, value: cart_item.id) %>
-                                    <%= f.submit('変更', class: "btn btn-primary btn-sm") %>
-                                <% end %>
-                            </div>
-                        </td>
-                        <td>
-                            <%# 商品ごとの小計を計算 %>
-                            <% sub_total = (cart_item.product.price * (1 + $tax_rate)).round * cart_item.amount %>
-                            <span><%= sub_total %></span>
-                            <% total_price += sub_total %>
-                        </td>
-                        <td>
-                            <div class="delete">
-                                <%= link_to("削除する", cart_item_path(cart_item.id), method: :DELETE, class: "btn btn-danger btn-sm") %>
-                            </div>
-                        </td>
-                    </tr>
-                <% end %>
-            </tbody>
-        </table>
-    </div>
-
-    <div class="row">
-        <div class="col-md-2">
-        <%= link_to("買い物を続ける", products_path, class: "btn btn-primary") %>
-        </div>
-        <div class="col-md-3 col-md-offset-7">
-        <table class="table table-bordered">
-            <tr>
-                <th class="active total_price">合計金額</th>
-                <td><%= total_price %></td>
-            </tr>
-        </table>
-    </div>
-    <div id="link">
-        <%= link_to("情報入力に進む", new_order_path, class: "btn btn-primary") %>
-    </div>
+<div id="cart_items_index">
+    <%= render('index', cart_items: @cart_items) %>
 </div>
 
 <style>
