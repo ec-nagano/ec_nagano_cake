@@ -1,0 +1,20 @@
+<div class="form-group">
+    <%= form_with(url: admin_search_result_path, local: true, class: "navbar-form") do |f| %>
+        <p id="search-introduction">検索する項目を選んでください：　</p>
+        <%= f.select(:search_model, [["商品（名前を検索）", "product_name"], ["商品（紹介文を検索）", "product_content"], ["会員（名前を検索）", "customer"], ["注文（注文ステータスを検索）", "order"], ["ジャンル（ジャンル名を検索）", "category"]], {include_blank: true}) %>
+        <p id="search-confirm">検索内容を入力してください：　</p>
+        <%= f.text_field(:search_word, class: "form-controll", placeholder: "キーワード") %>
+        <%= f.select(:search_order_status, [["入金待ち", 0], ["入金確認", 1], ["製作中", 2], ["発送準備中", 3], ["発送完了", 4]]) %>
+        <%= f.submit("検索する", style: "display: none;", class: "btn btn-info", id: "search-submit") %>
+    <% end %>
+</div>
+
+<style>
+    #search_order_status, #search_word, #search-confirm {
+        display: none;
+    }
+
+    .navbar-form {
+        height: 50px;
+    }
+</style>

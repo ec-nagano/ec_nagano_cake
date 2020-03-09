@@ -34,7 +34,10 @@ Rails.application.routes.draw do
   # 管理側
   namespace :admin do
 	  # admin/admins(devise)コントローラ
-	  get '/' => 'homes#top'
+    get '/' => 'homes#top'
+    # admin/search コントローラ
+    post 'search_result' => 'search#search_result'
+    get 'search_result' => 'homes#top'
 	  # admin/productsコントローラ
 	  resources :products, only: [:index, :new, :show, :edit, :create, :update]
 	  # admin/categoriesコントローラ
