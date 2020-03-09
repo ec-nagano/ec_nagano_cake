@@ -11,11 +11,11 @@
 
     <body>
     <header>
-    <div class="navbar-header">
-        <a class="navbar-logo" href="/">
-            <%= image_tag('logo.jpg') %>
-        </a>
-    </div>
+        <div class="navbar-header">
+            <a class="navbar-logo" href="/">
+                <%= image_tag('logo.png') %>
+            </a>
+        </div>
         <div id="slidemenu">
             <ul class="nav navbar-nav navbar-right" data-hover="dropdown" data-animations="zoomIn fadeIn fadeInUp fadeIn">
                 <% if current_customer %>
@@ -51,5 +51,9 @@
   .notice{
     color: red;
     font-size: 18px;
+  }
+
+  header {
+    background-color: #ffe4e1;
   }
   </style>

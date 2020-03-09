@@ -13,7 +13,7 @@
  *= require_tree .
  *= require_self
  */
- 
+
 @import "bootstrap-sprockets";
 @import "bootstrap";
 
@@ -35,10 +35,10 @@ body {
     height: 60px;
     background-color: #f5f5f5;
 }
- 
+
 /* Custom page CSS
 -------------------------------------------------- */
-/* Not required for template or sticky footer method. */  
+/* Not required for template or sticky footer method. */
 // .container {
 //     width: auto;
 //     max-width: 680px;

@@ -14,13 +14,20 @@
       <nav class="navbar navbar-main navbar-shadow" role="navigation" id="slide-nav">
         <div class="container">
           <div class="navbar-header">
-            <a class="navbar-logo" href="/">
-              <%= image_tag('logo.jpg') %>
-            </a>
+            <%# ログイン状態によってリンク先を変更する %>
+            <% if(current_admin) %>
+              <%= link_to(admin_path) do %>
+                <%= image_tag('logo.png') %>
+              <% end %>
+            <% else %>
+              <%= link_to(root_path) do %>
+                <%= image_tag('logo.png') %>
+              <% end %>
+            <% end %>
           </div>
           <div id="slidemenu">
             <ul class="nav navbar-nav navbar-right" data-hover="dropdown" data-animations="zoomIn fadeIn fadeInUp fadeIn">
-              <% if current_customer %>
+              <% if(current_customer) %>
                 <li>
                   <%= link_to("#{current_customer.first_name}様", "/customer/#{current_customer.id}") %>
                 </li>
@@ -30,13 +37,10 @@
                 <li>
                   <%= link_to("カートを見る", cart_items_path) %>
                 </li>
-              <% elsif current_admin %>
-                <form class="navbar-form">
-                  <div class="form-group">
-                    <input type="text" class="form-control" placeholder="キーワード">
-                  </div>
-                  <button type="submit" class="btn btn-info">検索</button>
-                </form>
+              <% elsif(current_admin) %>
+
+                <%= render('/admin/search/form') %>
+
                 <li>
                   <%= link_to("商品一覧", admin_products_path) %>
                 </li>
@@ -86,9 +90,19 @@
   </body>
 </html>
 
-  <style>
+<style>
   .notice{
     color: red;
     font-size: 18px;
   }
-  </style>
+
+  header {
+    background-color: #ffe4e1;
+  }
+
+  <% if(current_admin) %>
+    header img {
+      padding-top: 25px;
+    }
+  <% end %>
+</style>

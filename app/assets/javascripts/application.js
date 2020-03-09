@@ -54,4 +54,27 @@ $(document).ready(function () {
       return false;
     });
   }
+
+  $("#search_model").on("change", function(){
+    var val = $(this).val();
+    if (val == "order") {
+      $.when(
+        $("#search-introduction").fadeOut(),
+        $("#search_model").fadeOut()
+      ).done(function(){
+        $("#search-confirm").fadeIn();
+        $("#search_order_status").fadeIn();
+        $("#search-submit").fadeIn();
+      });
+    } else {
+      $.when(
+      $("#search-introduction").fadeOut(),
+      $("#search_model").fadeOut()
+      ).done(function(){
+      $("#search-confirm").fadeIn();
+      $("#search_word").fadeIn();
+      $("#search-submit").fadeIn();
+      })
+    }
+  });
 });
