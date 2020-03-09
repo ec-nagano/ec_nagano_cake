@@ -15,6 +15,7 @@
         <p><%= @product.content %></p>
         <h4>価格</h4>
         <p><span class="price">￥<%= (@product.price * (1 + $tax_rate)).round.to_s %></span>（税込）</p>
+        <p>ただいま、<%= CartItem.where(product_id: @product.id).count %>人がカートに入れています。</p>
       </div>
     </div>
     <%= form_with(model: @cart_item, url: cart_items_path, local: true) do |f| %>
