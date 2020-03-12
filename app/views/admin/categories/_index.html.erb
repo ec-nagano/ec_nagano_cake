@@ -1,0 +1,33 @@
+<!-- カテゴリー一覧表示 -->
+
+<table class="table table-hover table-inverse">
+  <thead>
+    <tr class="active">
+      <th>ジャンル</th>
+      <th>状態</th>
+      <th></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% categories.each do |category| %>
+      <tr>
+        <td>
+          <%= category.name %>
+        </td>
+        <td>
+          <% if category.is_active == true %>
+            有効
+          <% else %>
+            無効
+          <% end %>
+        </td>
+        <td>
+          <%= link_to("編集", edit_admin_category_path(category), class:'btn btn-primary') %>
+        </td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<!-- ここまで -->
