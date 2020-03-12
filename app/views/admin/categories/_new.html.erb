@@ -1,0 +1,29 @@
+<!-- カテゴリーの新規登録画面 -->
+
+<% if category.errors.any? %>
+  <div class="error_explanation">
+      <h4>【 入力されていない項目があります。 】</h4>
+    </div>
+<% end %>
+
+<div class="admin_category_new">
+
+  <%= form_with(model: category, url: admin_categories_path, method: :POST, remote: true) do |f| %>
+
+    <div class="category_new_field">
+      <div class="category_new">ジャンル</div>
+      <div class="category_new"><%= f.text_field :name %></div>
+
+      <div class="category_new">
+        <!-- ラジオボタン -->
+        <label><%=f.radio_button(:is_active, true) %>有効</label>
+        <label><%=f.radio_button(:is_active, false) %>無効</label>
+      </div>
+
+      <%= f.submit("追加", class: "btn btn-primary") %>
+
+    </div>
+
+  <% end %>
+
+</div>
