@@ -85,7 +85,7 @@ class OrdersController < ApplicationController
             ordered_item = OrderedItem.new(
                 order_id: order.id,
                 product_id: cart_item.product.id,
-                price: (cart_item.product.price * (1 * $tax_rate)).round,
+                price: (cart_item.product.price * (1 + $tax_rate)).round,
                 amount: cart_item.amount
             )
             ordered_item.save
@@ -112,5 +112,5 @@ class OrdersController < ApplicationController
             redirect_to("/customers/#{current_customer.id}")
         end
     end
-    
+
 end
