@@ -22,7 +22,7 @@ DMM WEB CAMP２ヶ月目のチーム開発での製作物です。
 ```
 $ git clone https://github.com/ec-nagano/ec_nagano_cake.git
 $ cd ec_nagano_cake
-$ rails db:migrate
+$ rails db:seed
 $ rails s -b 0.0.0.0
 ```
 [ローカルサーバー](http://localhost:3000/)にアクセスしてください。  
@@ -44,6 +44,7 @@ $ rails s -b 0.0.0.0
     - レイアウト
 - [stat-ki](https://github.com/stat-ki)
     - 顧客側カート、注文処理関連
+    - ヘッダー（検索機能）実装
     - UIテスト
     - コードレビュー
     - リファクタリング
